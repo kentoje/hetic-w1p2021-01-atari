@@ -1,0 +1,11 @@
+/* fireplace */
+.fireplaces {
+  display: flex;
+  justify-content: space-around;
+}
+
+.fireplace__position{
+  width: 50px;
+  height: 100px;
+  background-color: aqua;
+}

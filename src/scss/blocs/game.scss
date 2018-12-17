@@ -3,20 +3,14 @@
 .game__area {
   width: 1366px;
   height: 750px;
-  
-  background-color: red;
-}
-
-/* fireplace */
-.area {
+  background: black;
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.area__fireplace{
-  width: 50px;
-  height: 100px;
-  background-color: aqua;
+.path{
+  background-color: red;
+  height: 600px;
+  width: 20px;
 }
