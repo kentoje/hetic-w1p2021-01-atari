@@ -14,3 +14,9 @@ oxo.inputs.listenKey('enter', function() {
 /*
 * 
 */
+
+oxo.inputs.listenKey('enter', function() {
+
+  console.log(oxo.utils.getRandomNumber(1, 3));
+});
+
