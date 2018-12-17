@@ -1,0 +1,22 @@
+
+/* Game Area */
+.game__area {
+  width: 1366px;
+  height: 750px;
+  
+  background-color: red;
+}
+
+/* fireplace */
+.area {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.area__fireplace{
+  width: 50px;
+  height: 100px;
+  background-color: aqua;
+}
