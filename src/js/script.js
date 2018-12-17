@@ -7,11 +7,13 @@
 /* 
 * Variable
 */
-
-var speed = 100; // Speed game
+let initial; // Value Initial Game
+let speed = 100; // Speed game
+let position_initial = 20; // Initial Position
+let position_final = 600; // Finak Position
 let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
 let fireplace_array = ['fireplace_0', 'fireplace_2', 'fireplace_3', 'fireplace_4']; // Array Spawns
-
+let bonus; // Add a bonus
 //
 
 
