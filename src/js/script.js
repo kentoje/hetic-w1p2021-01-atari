@@ -41,11 +41,17 @@ let spawners_select;
 //});  
 //
 function game() {
+
+  
   for (let i = 0; i < spawners_select.length; i++) {
     spawners_select[i].addEventListener('click', function() {
       console.log('click');
+      
+
+
     });
   }
+
 }
 
 
