@@ -18,7 +18,7 @@ let initial; // Value Initial Game
 let position_minimum  = 500; // Initial Position
 let position_final = 600; // Finak Position
 let gift_statut = ['good', 'bad']; // Define if the gift is good or bad
-let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[1]}`, `gift_2 ${gift_statut[1]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
+let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
 let bonus; // Add a bonus
 //let gift_check; // Check gift statue
