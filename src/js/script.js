@@ -9,7 +9,6 @@
 */
 
 let initial; // Value Initial Game
-let speed = 1000; // Speed game
 let position_initial = 20; // Initial Position
 let position_final = 600; // Finak Position
 let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
@@ -23,7 +22,13 @@ let character;
 let position;
 let initialY;
 let move;
-let fireplace_select;
+let fireplace_select; //Choose the fireplace
+let laser; // Define the laser ID
+
+let speed = 3000; // Speed games
+let timer = 10;  //Game Timer
+let speed_gift = null; //Game stop
+let speed_timer = null; //Game stop 
 //
 
 /* 
@@ -37,87 +42,84 @@ let fireplace_select;
 
     //Select spawners
     spawners_select = document.querySelectorAll('.game__area .spawner .spawner__position');
-    console.log(spawners_select);
 
+    //Select laser
+    laser = document.getElementById('laser');
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    console.log('spawners_select  '+ spawners_select);
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Load Game Function
-    game(spawners_select);
+    //Load start Function
+    start();
   });  
 //});  
 //
 
 
 /*
-* Function game
+* Define Game Timer
 */
 
-function game(spawners_select) {
-  //Load Game Function
-  spawn(spawners_select);
-  //Load Turn Function
-  turn(spawners_select);
+function start(){
+  speed_gift = setInterval(level, speed);
+  speed_timer = setInterval(count, 1000);
+}	
 
+function count() {
+  timer--;
+  if(timer == 0){
+    finish();
+  } 
+  else {
+    // WHile time != 0 do :
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    console.log( timer + " secondes restantes");
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+  }	
 }
-//
+
+function finish() {
+  clearInterval(speed_timer);
+}
+
+/*
+* Define Level
+*/
+
+function level(){
+  clearInterval(speed_gift);
+  speed_gift++;
+  //Incrase level
+  speed = speed- 300;
+  spawn();
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  console.log( speed + " speed");
+  //console.log( speed_gift + " level");
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+}
 
 /*
 * Select and Create Gifts
 */
 
-function spawn(spawners_select, fireplace_select) {
+function spawn() {
 
+  //  Choose a random spawner
   fireplace_select = oxo.utils.getRandomNumber(0, 3);
-  
+  //console.log('fireplace_select ' +fireplace_select);
+
   //Remove all classes
-  spawners_select[fireplace_select].classList.remove('spawner__position', 'gift_0', 'gift_1', 'gift_2', 'gift_3');
+  spawners_select[fireplace_select].classList.remove('spawner__position', 
+  'gift_0', 
+  'gift_1', 
+  'gift_2', 
+  'gift_3');
 
-  //Spawn a gift
-  //spawners_select[i].classList.add(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts');
-
-  //spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts'}"></div>`;
+  //  Add a random gift
   spawners_select[fireplace_select].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
   
-  //Call SetMove
-  SetMove(spawners_select, fireplace_select);
-}
-
-//
-
-
-/*
-* Party Settings
-*/
-function turn(spawners_select, fireplace_select) {
-  turnInterval = setInterval(game, speed);
-  
 }
 //
-
-/*
-* Add move transition
-*/
-function SetMove(spawners_select, fireplace_select) {
-  // Add a translate effect
-  move = oxo.elements.createElement({
-    class: 
-    `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts gift_position`,
-    styles: 
-    {
-      transform: 'translate(' + position_initial.x + 'px, ' + position_final.y + 'px)',
-    },
-    appendTo: 'spawner' // Select spawner class
-  });
-  
-  // Give a id
-  NbGifts++;
-  move.setAttribute("id", `gift_moving_` + NbGifts);
-
-  console.log(move);
-
-
-}
-//
-
 
 
 /*
@@ -129,12 +131,12 @@ function SetMove(spawners_select, fireplace_select) {
 */
 
 oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
+
+  laser.classList.add("laser");
+  laser.classList.remove("laser");
+
+  var x = setTimeout(function() {laser.classList.toggle("laser"); }, 1);
+
   console.log(key); // For each fireplace
 });
 //
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//console.log(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
-//console.log(fireplace_array[oxo.utils.getRandomNumber(0, fireplace_array.length - 1)]);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
