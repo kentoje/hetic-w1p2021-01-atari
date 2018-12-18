@@ -15,7 +15,9 @@ let position_final = 600; // Finak Position
 let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
 let fireplace_array = ['fireplace_0', 'fireplace_2', 'fireplace_3', 'fireplace_4']; // Array Spawns
 let bonus; // Add a bonus
-let spawners_select;
+let spawners_select; // Select the spawner
+let spawn;
+let turnInterval; // The periodic call to the turn function
 //
 
 
@@ -34,27 +36,76 @@ let spawners_select;
     spawners_select = document.querySelectorAll('.game__area .spawner .spawner__position');
     console.log(spawners_select);
 
-
+    //Load Game Function
     game();
- 
   });  
 //});  
 //
+
+
+/*
+* Function game
+*/
 function game() {
+  //Load Game Function
+  spawn();
+  //Load Turn Function
+  turn();
+  //Load Turn Function
+  SetMove() 
 
-  
-  for (let i = 0; i < spawners_select.length; i++) {
-    spawners_select[i].addEventListener('click', function() {
-      console.log('click');
-      
 
-
-    });
-  }
 
 }
+//
+
+/*
+* Select and Create Gifts
+*/
+
+function spawn() {
+  
+     
+  for (let i = 0; i < spawners_select.length; i++) {
+    spawners_select[i].addEventListener('click', function() {
+    console.log('click');
+
+    spawners_select[i].classList.remove('spawner__position');
+
+    //Spawn a gift
+    spawners_select[i].classList.toggle(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
+
+    
+    });
+  }
+}
+//
 
 
+/*
+* Party Settings
+*/
+function turn() {
+
+
+
+}
+//
+
+/*
+* Add move transition
+*/
+function SetMove() {
+  // Add a translate effect
+  var move = oxo.elements.createElement({
+    class: 'spawner__position spawner__position--tail',
+    styles: {
+      transform:
+        'translate(' + position_initial.x + 'px, ' + position_final.y + 'px)',
+    }
+  })
+}
+//
 
 /*
 * Keys write
