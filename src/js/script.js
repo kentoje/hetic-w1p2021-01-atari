@@ -20,6 +20,15 @@ let spawn;
 let turnInterval; // The periodic call to the turn function
 //
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
+/* var character;
+character = document.getElementById('character');
+var position = oxo.animation.getPosition(character);
+console.log(position.x); // 10
+console.log(position.y); // 0 */
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
 /* 
 * Load the game when enter is press
@@ -52,9 +61,7 @@ function game() {
   //Load Turn Function
   turn();
   //Load Turn Function
-  SetMove() 
-
-
+//  SetMove() 
 
 }
 //
@@ -69,13 +76,19 @@ function spawn() {
   for (let i = 0; i < spawners_select.length; i++) {
     spawners_select[i].addEventListener('click', function() {
     console.log('click');
-
-    spawners_select[i].classList.remove('spawner__position');
+    
+    //Remove all classes
+    spawners_select[i].classList.remove('spawner__position', 'gift_0', 'gift_1', 'gift_2', 'gift_3');
 
     //Spawn a gift
-    spawners_select[i].classList.toggle(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
+    //spawners_select[i].classList.add(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts');
 
+    //spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts'}"></div>`;
+    spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
     
+    
+    
+    SetMove();
     });
   }
 }
@@ -98,12 +111,13 @@ function turn() {
 function SetMove() {
   // Add a translate effect
   var move = oxo.elements.createElement({
-    class: 'spawner__position spawner__position--tail',
+    class: `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts`,
     styles: {
       transform:
         'translate(' + position_initial.x + 'px, ' + position_final.y + 'px)',
     }
   })
+  console.log(move);
 }
 //
 
@@ -116,7 +130,15 @@ oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
 });
 //
 
+/*
+* animation Key
+*/
+function animationKey() {
 
+
+
+}
+//
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 console.log(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
