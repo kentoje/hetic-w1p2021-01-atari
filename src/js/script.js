@@ -25,7 +25,8 @@ let spawners_select;
 
 //oxo.inputs.listenKey('enter', function() {
   // do something
-  oxo.screens.loadScreen('game', function() {
+//FIXME: UNCOMMENT ME
+/*   oxo.screens.loadScreen('game', function() {
     // game.html is loaded, do something
     
    var test = document.querySelector('.game__area .spawner .spawner__position');
@@ -37,7 +38,8 @@ let spawners_select;
 
     game();
  
-  });  
+  });   */
+//FIXME: UNCOMMENT ME
 //});  
 //
 function game() {
