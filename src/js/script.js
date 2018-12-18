@@ -9,7 +9,7 @@
 */
 
 let initial; // Value Initial Game
-let speed = 100; // Speed game
+let speed = 1000; // Speed game
 let position_initial = 20; // Initial Position
 let position_final = 600; // Finak Position
 let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
@@ -23,8 +23,8 @@ let character;
 let position;
 let initialY;
 let move;
+let fireplace_select;
 //
-
 
 /* 
 * Load the game when enter is press
@@ -50,13 +50,12 @@ let move;
 /*
 * Function game
 */
+
 function game(spawners_select) {
   //Load Game Function
   spawn(spawners_select);
   //Load Turn Function
   turn(spawners_select);
-  //Load Turn Function
-//  SetMove() 
 
 }
 //
@@ -65,34 +64,31 @@ function game(spawners_select) {
 * Select and Create Gifts
 */
 
-function spawn(spawners_select) {
-  for (let i = 0; i < spawners_select.length; i++) {
-    spawners_select[i].addEventListener('click', function() {
-    console.log('click');
-    
-    //Remove all classes
-    spawners_select[i].classList.remove('spawner__position', 'gift_0', 'gift_1', 'gift_2', 'gift_3');
+function spawn(spawners_select, fireplace_select) {
 
-    //Spawn a gift
-    //spawners_select[i].classList.add(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts');
+  fireplace_select = oxo.utils.getRandomNumber(0, 3);
+  
+  //Remove all classes
+  spawners_select[fireplace_select].classList.remove('spawner__position', 'gift_0', 'gift_1', 'gift_2', 'gift_3');
 
-    //spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts'}"></div>`;
-    spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
-    
-    //Call SetMove
-    SetMove();
-    });
-  }
+  //Spawn a gift
+  //spawners_select[i].classList.add(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts');
+
+  //spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts'}"></div>`;
+  spawners_select[fireplace_select].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
+  
+  //Call SetMove
+  SetMove(spawners_select, fireplace_select);
 }
+
 //
 
 
 /*
 * Party Settings
 */
-function turn() {
-  
-  
+function turn(spawners_select, fireplace_select) {
+  turnInterval = setInterval(game, speed);
   
 }
 //
@@ -100,7 +96,7 @@ function turn() {
 /*
 * Add move transition
 */
-function SetMove() {
+function SetMove(spawners_select, fireplace_select) {
   // Add a translate effect
   move = oxo.elements.createElement({
     class: 
@@ -112,32 +108,13 @@ function SetMove() {
     appendTo: 'spawner' // Select spawner class
   });
   
-  //move.className = `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts gift_position`;
-  
   // Give a id
   NbGifts++;
   move.setAttribute("id", `gift_moving_` + NbGifts);
 
   console.log(move);
-  // Receive Id
-
- /*  
-  //character = document.getElementById(`gift_moving_` + NbGifts);
-  character = document.getElementById(`gift_moving_1`);
-  //character = document.getElementById(`test`);
-  initialY = character.getBoundingClientRect().y;
 
 
-
-
-
-  console.log(initialY);
-  //position = oxo.animation.getPosition(character);
-  //console.log(character);
-  console.log(NbGifts);
-  //console.log(position.y); // 0 
-  
-  */
 }
 //
 
@@ -158,6 +135,6 @@ oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-console.log(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
-console.log(fireplace_array[oxo.utils.getRandomNumber(0, fireplace_array.length - 1)]);
+//console.log(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
+//console.log(fireplace_array[oxo.utils.getRandomNumber(0, fireplace_array.length - 1)]);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
