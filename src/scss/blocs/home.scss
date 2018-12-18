@@ -7,6 +7,10 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
 
 body {
   min-height: 100vh;
@@ -48,7 +52,12 @@ body {
     align-items: center;
     .instruction__key {
       font-size: 20px;
-
+      position: absolute;
+      left: 2vw;
+      bottom: 26vh;
+      overflow-wrap: normal;
+      width: 250px;
+      height: 80px;
     }
   }
   .game__display {
