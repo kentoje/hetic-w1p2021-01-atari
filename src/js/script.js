@@ -87,6 +87,7 @@ function spawn() {
     spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
     
     
+
     
     
     SetMove();
