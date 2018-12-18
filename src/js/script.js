@@ -16,7 +16,7 @@ let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
 let fireplace_array = ['fireplace_0', 'fireplace_2', 'fireplace_3', 'fireplace_4']; // Array Spawns
 let bonus; // Add a bonus
 let spawners_select; // Select the spawner
-let spawn;
+let spawnTest;
 let turnInterval; // The periodic call to the turn function
 let NbGifts = 0; // Total of gifts
 let character;
@@ -110,7 +110,7 @@ function SetMove() {
       transform: 'translate(' + position_initial.x + 'px, ' + position_final.y + 'px)',
     },
     appendTo: 'spawner' // Select spawner class
-  })
+  });
   
   //move.className = `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts gift_position`;
   
