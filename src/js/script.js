@@ -21,12 +21,10 @@ let turnInterval; // The periodic call to the turn function
 let NbGifts = 0; // Total of gifts
 let character;
 let position;
+let initialY;
+let move;
 //
-//////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
 
 /* 
 * Load the game when enter is press
@@ -68,7 +66,6 @@ function game(spawners_select) {
 */
 
 function spawn(spawners_select) {
-     
   for (let i = 0; i < spawners_select.length; i++) {
     spawners_select[i].addEventListener('click', function() {
     console.log('click');
@@ -82,11 +79,10 @@ function spawn(spawners_select) {
     //spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)], 'gifts'}"></div>`;
     spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
     
-    
-    
+    //Call SetMove
     SetMove();
-  });
-}
+    });
+  }
 }
 //
 
@@ -106,7 +102,7 @@ function turn() {
 */
 function SetMove() {
   // Add a translate effect
-  var move = oxo.elements.createElement({
+  move = oxo.elements.createElement({
     class: 
     `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts gift_position`,
     styles: 
@@ -116,17 +112,20 @@ function SetMove() {
     appendTo: 'spawner' // Select spawner class
   })
   
+  //move.className = `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts gift_position`;
+  
   // Give a id
   NbGifts++;
   move.setAttribute("id", `gift_moving_` + NbGifts);
 
+  console.log(move);
   // Receive Id
 
-  
+ /*  
   //character = document.getElementById(`gift_moving_` + NbGifts);
   character = document.getElementById(`gift_moving_1`);
   //character = document.getElementById(`test`);
-  var initialY = character.getBoundingClientRect().y;
+  initialY = character.getBoundingClientRect().y;
 
 
 
@@ -134,12 +133,14 @@ function SetMove() {
 
   console.log(initialY);
   //position = oxo.animation.getPosition(character);
-  console.log(move);
   //console.log(character);
   console.log(NbGifts);
-  //console.log(position.y); // 0
+  //console.log(position.y); // 0 
+  
+  */
 }
 //
+
 
 
 /*
@@ -154,7 +155,6 @@ oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
   console.log(key); // For each fireplace
 });
 //
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
