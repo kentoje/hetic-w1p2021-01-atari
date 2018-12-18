@@ -7,6 +7,7 @@
 /* 
 * Variable
 */
+
 let initial; // Value Initial Game
 let speed = 100; // Speed game
 let position_initial = 20; // Initial Position
@@ -14,6 +15,7 @@ let position_final = 600; // Finak Position
 let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
 let fireplace_array = ['fireplace_0', 'fireplace_2', 'fireplace_3', 'fireplace_4']; // Array Spawns
 let bonus; // Add a bonus
+let spawners_select;
 //
 
 
@@ -29,20 +31,33 @@ let bonus; // Add a bonus
    var test = document.querySelector('.game__area .spawner .spawner__position');
     console.log(test);
     
-    var spawners_select = document.querySelectorAll('.game__area .spawner .spawner__position');
+    spawners_select = document.querySelectorAll('.game__area .spawner .spawner__position');
     console.log(spawners_select);
+
+
+    game();
  
   });  
 //});  
-
 //
+function game() {
+  for (let i = 0; i < spawners_select.length; i++) {
+    spawners_select[i].addEventListener('click', function() {
+      console.log('click');
+    });
+  }
+}
 
 
 
+/*
+* Keys write
+*/
 
-
-
-
+oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
+  console.log(key); // 'up' or 'down';
+});
+//
 
 
 
