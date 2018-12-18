@@ -18,15 +18,13 @@ let bonus; // Add a bonus
 let spawners_select; // Select the spawner
 let spawn;
 let turnInterval; // The periodic call to the turn function
+let NbGifts = 0; // Total of gifts
+let character;
+let position;
 //
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
-/* var character;
-character = document.getElementById('character');
-var position = oxo.animation.getPosition(character);
-console.log(position.x); // 10
-console.log(position.y); // 0 */
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -38,15 +36,14 @@ console.log(position.y); // 0 */
   // do something
   oxo.screens.loadScreen('game', function() {
     // game.html is loaded, do something
-    
-   var test = document.querySelector('.game__area .spawner .spawner__position');
-    console.log(test);
-    
+
+    //Select spawners
     spawners_select = document.querySelectorAll('.game__area .spawner .spawner__position');
     console.log(spawners_select);
 
+
     //Load Game Function
-    game();
+    game(spawners_select);
   });  
 //});  
 //
@@ -55,11 +52,11 @@ console.log(position.y); // 0 */
 /*
 * Function game
 */
-function game() {
+function game(spawners_select) {
   //Load Game Function
-  spawn();
+  spawn(spawners_select);
   //Load Turn Function
-  turn();
+  turn(spawners_select);
   //Load Turn Function
 //  SetMove() 
 
@@ -70,8 +67,7 @@ function game() {
 * Select and Create Gifts
 */
 
-function spawn() {
-  
+function spawn(spawners_select) {
      
   for (let i = 0; i < spawners_select.length; i++) {
     spawners_select[i].addEventListener('click', function() {
@@ -87,12 +83,10 @@ function spawn() {
     spawners_select[i].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
     
     
-
-    
     
     SetMove();
-    });
-  }
+  });
+}
 }
 //
 
@@ -101,9 +95,9 @@ function spawn() {
 * Party Settings
 */
 function turn() {
-
-
-
+  
+  
+  
 }
 //
 
@@ -113,34 +107,55 @@ function turn() {
 function SetMove() {
   // Add a translate effect
   var move = oxo.elements.createElement({
-    class: `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts`,
-    styles: {
-      transform:
-        'translate(' + position_initial.x + 'px, ' + position_final.y + 'px)',
-    }
+    class: 
+    `${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts gift_position`,
+    styles: 
+    {
+      transform: 'translate(' + position_initial.x + 'px, ' + position_final.y + 'px)',
+    },
+    appendTo: 'spawner' // Select spawner class
   })
+  
+  // Give a id
+  NbGifts++;
+  move.setAttribute("id", `gift_moving_` + NbGifts);
+
+  // Receive Id
+
+  
+  //character = document.getElementById(`gift_moving_` + NbGifts);
+  character = document.getElementById(`gift_moving_1`);
+  //character = document.getElementById(`test`);
+  var initialY = character.getBoundingClientRect().y;
+
+
+
+
+
+  console.log(initialY);
+  //position = oxo.animation.getPosition(character);
   console.log(move);
+  //console.log(character);
+  console.log(NbGifts);
+  //console.log(position.y); // 0
 }
 //
+
 
 /*
 * Keys write
+* q : fireplace_0
+* s : fireplace_1
+* d : fireplace_2
+* f : fireplace_3
 */
 
 oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
-  console.log(key); // 'up' or 'down';
+  console.log(key); // For each fireplace
 });
 //
 
-/*
-* animation Key
-*/
-function animationKey() {
 
-
-
-}
-//
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 console.log(gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]);
