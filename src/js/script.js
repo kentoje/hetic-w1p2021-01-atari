@@ -4,12 +4,19 @@
 *
 */
 
+/*
+* Demander setInterval
+*/
+
+
+
+
 /* 
 * Variable
 */
 
 let initial; // Value Initial Game
-let position_initial = 20; // Initial Position
+let position_minimum  = 500; // Initial Position
 let position_final = 600; // Finak Position
 let gift_array = ['gift_0', 'gift_1', 'gift_2', 'gift_3']; // Array Gifts
 let fireplace_array = ['fireplace_0', 'fireplace_2', 'fireplace_3', 'fireplace_4']; // Array Spawns
@@ -18,7 +25,7 @@ let spawners_select; // Select the spawner
 let spawnTest;
 let turnInterval; // The periodic call to the turn function
 let NbGifts = 0; // Total of gifts
-let character;
+let character;  // Define the active gift
 let position;
 let initialY;
 let move;
@@ -29,6 +36,7 @@ let speed = 3000; // Speed games
 let timer = 10;  //Game Timer
 let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
+let timer_laser = 10; // Timer Laser
 //
 
 /* 
@@ -46,7 +54,7 @@ let speed_timer = null; //Game stop
     //Select laser
     laser = document.getElementById('laser');
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    console.log('spawners_select  '+ spawners_select);
+    //console.log('spawners_select  '+ spawners_select);
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     //Load start Function
@@ -73,7 +81,7 @@ function count() {
   else {
     // WHile time != 0 do :
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    console.log( timer + " secondes restantes");
+    //console.log( timer + " secondes restantes");
     ///////////////////////////////////////////////////////////////////////////////////////////////
   }	
 }
@@ -93,7 +101,7 @@ function level(){
   speed = speed- 300;
   spawn();
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  console.log( speed + " speed");
+  //console.log( speed + " speed");
   //console.log( speed_gift + " level");
   ///////////////////////////////////////////////////////////////////////////////////////////////
 }
@@ -115,8 +123,20 @@ function spawn() {
   'gift_2', 
   'gift_3');
 
-  //  Add a random gift
-  spawners_select[fireplace_select].innerHTML = `<div class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
+  //  Add a random gift and define 1 ID for each
+  NbGifts++;
+  spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
+  
+  //  Select the last id was created
+  character = document.getElementById(`gift_moving_${NbGifts}`);
+  position = oxo.animation.getPosition(character);
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  //console.log( spawners_select[fireplace_select]);
+  //console.log(character);
+  //console.log(position = oxo.animation.getPosition(character));
+  //console.log(position.x);
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   
 }
 //
@@ -132,11 +152,40 @@ function spawn() {
 
 oxo.inputs.listenKeys(['q', 's','d', 'f'], function(key) {
 
+  // Visual Effect
   laser.classList.add("laser");
-  laser.classList.remove("laser");
+  // Disapear laser after a delay
+  setTimeout(function() {
+    laser.classList.remove("laser");
+  }, timer_laser);
 
-  var x = setTimeout(function() {laser.classList.toggle("laser"); }, 1);
+  if(key === 'q'){
+    if (position_minimum <= position.y  &&  position.y <= position_final) {
+      // Add to score
+      oxo.player.addToScore(5);
+    }
+  }
 
-  console.log(key); // For each fireplace
+  if(key === 's'){
+    if (position_minimum <= position.y  &&  position.y <= position_final) {
+      // Add to score
+      oxo.player.addToScore(5);
+    }
+  }
+
+  if(key === 'd'){
+    if (position_minimum <= position.y  &&  position.y <= position_final) {
+      // Add to score
+      oxo.player.addToScore(5);
+    }
+  }
+
+  if(key === 'f'){
+    if (position_minimum <= position.y  &&  position.y <= position_final) {
+      // Add to score
+      oxo.player.addToScore(5);
+    }
+  }
 });
 //
+
