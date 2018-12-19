@@ -91,10 +91,9 @@ let audio_background;
 */
 
 function start(){
-  // Music
-  //let player = new Audio('../song/song.mp3')
   //player.play();
   audio_background.play();
+  
   speed_gift = setInterval(level, speed);
   speed_timer = setInterval(count, 1000);
 }	
