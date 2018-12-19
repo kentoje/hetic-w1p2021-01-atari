@@ -1,5 +1,3 @@
-import { cpus } from "os";
-
 /*
 * Project : JS
 * Date : 17/12/2018
@@ -26,7 +24,7 @@ import { cpus } from "os";
 let initial; // Value Initial Game
 let position; // Actual Position Gift
 let position_minimum  = 500; // Initial Position
-let position_final = 600; // Finak Position
+let position_final = 700; // Finak Position
 let gift_statut = ['good', 'bad']; // Define if the gift is good or bad
 let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
@@ -45,8 +43,8 @@ let health = 3; // Nb of life
 let health_array = [`health_0`, `health_1`, `health_2`]
 let health_select;
 
-let speed = 3000; // Speed games
-let timer = 130;  //Game Timer
+let speed = 1000; // Speed spawn gifts
+let timer = 90;  //Game Timer
 let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
 let timer_laser = 10; // Timer Laser
@@ -107,7 +105,7 @@ function count() {
   else {
     // WHile time != 0 do :
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    console.log( timer + " secondes restantes");
+    //console.log( timer + " secondes restantes");
     ///////////////////////////////////////////////////////////////////////////////////////////////
   }	
 }
@@ -129,10 +127,10 @@ function finish() {
 
 function level(){
   //Incrase level
-  speed = speed- 300;
+  speed = speed- 30;
   spawn();
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  //console.log( speed + " speed");
+  console.log( speed + " speed");
   //console.log( speed_gift + " level");
   ///////////////////////////////////////////////////////////////////////////////////////////////
 }
@@ -142,7 +140,7 @@ function level(){
 */
 
 function spawn() {
-  console.log('spawn');
+  //console.log('spawn');
 
   //  Choose a random spawner
   fireplace_select = oxo.utils.getRandomNumber(0, 3);
@@ -164,23 +162,6 @@ function spawn() {
 
   //Check position gift
   gift_move();
-
-  if (character.classList.contains(`bad`)){
-    console.log('bad');
-  }
-    else {
-    console.log('good');
-  }
-
-
-
-
-
-
-
-
-
-
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //console.log( spawners_select[fireplace_select]);
@@ -225,17 +206,17 @@ function gift_move() {
 */
 
 oxo.inputs.listenKeys([ `q`], function(key) {
-  
+  laser_effect();
   // Compare the tower was selected
   if(spawners_select[0] === spawners_select[fireplace_select]) {
-    console.log('q');
-    score();
+  console.log('q');
+  score();
   }
 });
 
 
 oxo.inputs.listenKeys([ `s`], function(key) {
-  
+  laser_effect();
   // Compare the tower was selected
   if(spawners_select[1] === spawners_select[fireplace_select]) {
     console.log('s');
@@ -245,7 +226,7 @@ oxo.inputs.listenKeys([ `s`], function(key) {
 
 
 oxo.inputs.listenKeys([ `d`], function(key) {
-  
+  laser_effect();
   // Compare the tower was selected
   if(spawners_select[2] === spawners_select[fireplace_select]) {
     console.log('d');
@@ -255,7 +236,7 @@ oxo.inputs.listenKeys([ `d`], function(key) {
 
 
 oxo.inputs.listenKeys([ `f`], function(key) {
-  
+  laser_effect();
   // Compare the tower was selected
   if(spawners_select[3] === spawners_select[fireplace_select]) {
     console.log('f');
@@ -275,19 +256,34 @@ function score(){
       health--;
       health_select[health].classList.remove(`health`);
       speed = speed- 15;
-
+      
       //Arrête la partie
       if(health === 0){
         finish();
-
+        
       } 
     } else {
       // Add to score
       oxo.player.addToScore(5);
       speed = speed- 30;
-
+      
       // One time for each gift
       position = 0;
     }
   } 
 }
+//
+
+/* 
+* Effect laser
+*/
+ 
+function laser_effect() {
+  // Visual Effect
+  laser.classList.add(`laser`);
+  // Disapear laser after a delay
+  setTimeout(function() {
+  laser.classList.remove(`laser`);
+  }, timer_laser);
+}
+//
