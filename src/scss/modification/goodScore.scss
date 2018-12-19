@@ -1,0 +1,8 @@
+.goodScore{
+  .window{
+    &::before{
+      background-position: center;
+      background-image: url(../img/SVG/lichterkette.gif);
+    }
+  }
+}

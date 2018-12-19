@@ -1,0 +1,47 @@
+.badScore{
+  .window{
+    &::before{
+      background-position: center;
+      background-image: url(../img/SVG/lagerfeuer.gif);
+    }
+  }
+  .snowman{
+    .snowman__head{
+      @keyframes snowmanExplosion{
+        0%   {transform: rotate(0deg) translate3d(0px,0px,0);}
+        100%   {transform: rotate(-36deg) translate3d(-100px,-350px,0);}
+      }
+      animation: snowmanExplosion 0.3s ease-in forwards 2.1s;
+    }
+    .snowman__body{
+      @keyframes snowmanTurn{
+        0%   {transform: rotate(0deg)}
+        100%   {transform: rotate(-5deg)}
+      }
+      transform-origin: bottom center;
+      animation: snowmanTurn 0.3s ease-in forwards 2s;
+
+    }
+    .snowman__arm{
+      @keyframes broomFalling{
+        0%   {transform: rotate(0deg)}
+        100%   {transform: rotate(83deg)}
+      }
+      transform-origin: bottom left;
+      animation: broomFalling 0.3s ease-in forwards 2.1s;
+      &::after{
+        @include pseudo--absolute;
+        width: 5vw;
+        height: 7vw;
+        top: -4vw;
+        right:0;
+        background-image: url(../img/SVG/lagerfeuer.gif);
+        animation: broomFalling__fireTurn 0.3s linear forwards 2.1s;
+        @keyframes broomFalling__fireTurn {
+          0%   {transform: rotate(0deg)}
+          100%   {transform: rotate(-90deg)}
+        }
+      }
+    }
+  }
+}

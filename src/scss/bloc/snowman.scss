@@ -1,0 +1,32 @@
+.snowman{
+  position: absolute;
+  width: 10vw;
+  bottom: 1vw;
+  left:10vw;
+  z-index: 4;
+  .snowman__head{
+    position: absolute;
+    top: -7vw;
+    left: 17%;
+    width: 61%;
+    z-index: 4;
+  }
+  .snowman__arm{
+    position: absolute;
+    right: -27%;
+    top: -6vw;
+    width: 52%;
+  }
+}
+
+.snow--onTheGround{
+  position:absolute;
+  bottom: 0;
+  width: 40vw;
+  left:5vw;
+}
+
+.snow--onTheGround{
+  position: absolute;
+  bottom: 0;
+}

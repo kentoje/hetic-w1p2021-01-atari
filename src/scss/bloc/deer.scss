@@ -1,0 +1,117 @@
+.deer{
+  @keyframes deer{
+    from   {bottom: -8.6vw;}
+    to   {bottom: -9.4vw;}
+  }
+  width: 120px;
+  position: absolute;
+  left: 5vw;
+  height: 270px;
+  animation: deer 0.8s ease-in-out infinite alternate;
+  img{
+    position: absolute;
+  }
+  .deer__body{
+    bottom: 0;
+    width: 50%;
+    left: 25%;
+  }
+  .deer__arm{
+    position: relative;
+    width: 60%;
+    top: 10px;
+    left: 40px;
+    transform-origin: 15px 10px;
+    .deer__arm--shoot__image{
+      position: absolute;
+      z-index: 2;
+    }
+    .flash{
+      width: 10px;
+      height:70px;
+      position: absolute;
+      z-index: 1;
+      bottom: -18vw;
+      right: 1vw;
+      &::after{
+        @include pseudo--absolute($color--bg);
+        top:0;
+        right:0;
+        left:0;
+        bottom: 0;
+      }
+    }
+  }
+  .deer__head{
+    top: 0;
+    width: 50%;
+    margin-left: 25%;
+    z-index: 2;
+  }
+}
+
+.head{
+  position: relative;
+  .head__face{
+    position: relative;
+  }
+  .head__corne{
+    top:-40px;
+    right: -38px;
+    width: 80%;
+    &.head__corne--right{
+      @keyframes corne--right{
+        from   {transform: rotate(0deg);}
+        to   {transform: rotate(15deg)}
+      }
+      animation: corne--right 1s ease-in-out infinite alternate;
+      transform-origin: bottom left;
+    }
+    &.head__corne--left{
+      @keyframes corne--left{
+        from   {transform: rotate(0deg);}
+        to   {transform: rotate(-15deg)}
+      }
+      animation: corne--left 1s ease-in-out infinite alternate;
+      transform-origin: bottom right;
+      left: -38px; 
+    }
+  }
+  .head__ear{
+    top:30px;
+    right: -30px;
+    width: 80%;
+    &.head__ear--left{
+      transform: scaleX(-1);
+      left: -30px;
+    }
+  }
+}
+
+.deer__arm--end{
+  @keyframes arm--fin{
+    0%   {transform: rotate(-90deg);}
+    80%   {transform: rotate(-125deg);}
+    90%   {transform: rotate(-125deg) translate3d(0px,-10px,0);}
+    100%   {transform: rotate(-125deg) translate3d(0px,0px,0);}
+  }
+  animation: arm--fin 0.8s forwards;
+  @include flashShoot(.5s)
+}
+
+.deer__arm--shoot{
+  @keyframes arm--shoot{
+    0%   {transform: rotate(-90deg) translate3d(0px, -10px,0);}
+    100%   {transform: rotate(-90deg) translate3d(0px,0px,0);}
+  }
+  animation: arm--shoot .3s forwards;
+  @include flashShoot(0.1s)
+}
+
+.deer__arm--start{
+  @keyframes arm{
+    from   {transform: rotate(0deg);}
+    to   {transform: rotate(-90deg);}
+  }
+  animation: arm 1s ease-in forwards;
+}

@@ -1,0 +1,64 @@
+.house{
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  .house__roof{
+    top: 0;
+    right: 10vw;
+    left:10vw;
+    width: 80vw;
+  }
+  
+  .house__snowBorder{
+    top: -1px;
+    width: 102%;
+    margin-left: -1%;
+    margin-top: -7px;
+  }
+  
+  .house__wall{
+    width: 90%;
+    margin-left: 5%;
+    background-color:#E2A66F;
+    border: solid 2px black;
+    height: 38.5vw;
+    margin-top: -10vw;
+  }
+  
+  .house__window{
+    width: 10vw;
+    height: 10vw;
+    margin-top: 15vw;
+    position: absolute;
+  }
+}
+
+
+.window{
+  position: absolute;
+  background-color: #fff;
+  top: 70px;
+  &::before{
+    @include pseudo--absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .window__grid{
+    position: absolute;
+  }
+  .window__border{
+    position: absolute;
+  }
+  &.window--1{
+    left: 19%;
+  }
+  &.window--2{
+    left: 35.55%;
+  }
+  &.window--3{
+    left: 52.1%;
+  }
+  &.window--4{
+    left: 68.4%;
+  }
+}

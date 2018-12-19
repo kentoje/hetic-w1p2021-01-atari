@@ -1,0 +1,20 @@
+@mixin pseudo--absolute($color: transparent) {
+  content: "";
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: $color;
+}
+
+@mixin flashShoot($delay: 0.3s) {
+  .flash{
+    &::after{
+      @keyframes flash--shoot{
+        0%   {top:0%;}
+        100%   {top:100%;}
+      }
+      animation: flash--shoot .2s $delay alternate;
+    }
+  }
+}

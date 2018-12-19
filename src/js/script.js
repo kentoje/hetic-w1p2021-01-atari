@@ -158,8 +158,22 @@ function spawn() {
 
   //  Add a random gift and define 1 ID for each
   NbGifts++;
-  spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
+  //spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
   
+  spawners_select[fireplace_select].innerHTM = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present"><div class="present__image"><div class="present__value present__value--coint"><img src="../img/SVG/coint.svg"></div><div class="present__value present__value--boom"><img src="../img/SVG/boom.svg"></div></div></div></div>`
+  
+  
+  
+    
+  
+  
+    
+ 
+
+
+
+
+
   //  Select the last id was created
   character = document.getElementById(`gift_moving_${NbGifts}`);
 
@@ -167,7 +181,7 @@ function spawn() {
   gift_move();
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  //console.log( spawners_select[fireplace_select]);
+  console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
   //console.log(character);
   //console.log(position = oxo.animation.getPosition(character));

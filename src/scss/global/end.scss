@@ -1,0 +1,46 @@
+.scoreMessage{
+  position: absolute;
+  width: 50%;
+  left:25%;
+  bottom: 4vw;
+  background-color: #fff;
+  color: black;
+  padding: 20px;
+  border: solid 3px black;
+  text-align: center;
+  p{
+    color: black;
+  }
+  span{
+    display: block;
+  }
+  .scoreMessage__headline{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .scoreMessage__value{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scoreMessage__message{
+    margin-bottom: 10px;
+    padding: 10px;
+    font-weight: bold;
+  }
+  .scoreMessage__button{
+    background-color: #49844D;
+    color: #fff;
+    @keyframes buttomScale{
+      from   {transform: scale(1);}
+      to   {transform: scale(1.1);}
+    }
+    animation: buttomScale 1s ease-in-out infinite alternate;
+    &:hover{
+      background-color: $color--bg;
+    }
+  }
+}

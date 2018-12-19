@@ -1,0 +1,16 @@
+*{
+  box-sizing: border-box;
+}
+p,a{
+  line-height: 1.3em;
+  color: #000;
+  display: block;
+}
+.button{
+  padding: 5px 10px;
+  font-size: 1em;
+  background-color: #fff;
+  color: #000;
+  border: solid 3px black;
+  border-radius: 10px;
+}
