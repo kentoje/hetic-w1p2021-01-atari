@@ -25,4 +25,25 @@
   height: 200%;
   width: 20px;
   margin-right: 10px;
-} 
+}
+
+
+.help{
+  background-color: red;
+  height: 75px;
+  width: 500px;
+  margin-top: 400px;
+  margin-left: 400px;
+  z-index: -1;
+  position: absolute;
+}
+
+.help_2{
+  background-color: blue;
+  height: 700px;
+  width: 5px;
+  margin-top: 0px;
+  margin-left: 450px;
+  z-index: 5;
+  position: absolute;
+}

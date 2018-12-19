@@ -23,8 +23,10 @@
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 500; // Initial Position
+let position_minimum  = 400; // Initial Position
+let position_maximun = 475; // Maximun position
 let position_final = 700; // Finak Position
+let position_status;
 let countdown_start;
 let gift_color_array = ['red', 'yellow', 'green', 'black'];
 let gift_color_select;
@@ -74,12 +76,11 @@ oxo.inputs.listenKey('enter', function() {
     //  Show  countdown when the party starts 
     let timeleft = 3;
     let time_start_interval = setInterval(function(){
-      let time_start = [`GO`, `1`,`2`,`3`];
-      console.log(time_start[timeleft]);
-      countdown_start.innerHTML = `${time_start[timeleft]}`
-      timeleft--;
-      if(timeleft < 0)
-        clearInterval(time_start_interval);
+    let time_start = [`GO`, `1`,`2`,`3`];
+    countdown_start.innerHTML = `${time_start[timeleft]}`
+    timeleft--;
+    if(timeleft < 0)
+      clearInterval(time_start_interval);
     },1000);
 
 
@@ -100,7 +101,10 @@ oxo.inputs.listenKey('enter', function() {
       ///////////////////////////////////////////////////////////////////////////////////////////////
 
       //Load start Function
-      start();
+      setTimeout(function() {
+        laser.classList.remove(`laser`);
+        start();
+        }, 4500);
     }); 
   } 
 });  
@@ -197,7 +201,7 @@ function spawn() {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
-  console.log(character);
+  //console.log(character);
   //console.log(position = oxo.animation.getPosition(character));
   //console.log(position.x);
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -214,12 +218,28 @@ function gift_move() {
   // Id use is Character
   position = 0;
 
-  refresh_timer = setInterval(frame, 30);
+  refresh_timer = setInterval(frame, 100);
   function frame() {
     if (position == position_final) {
       clearInterval(refresh_timer);
     } else {
-      position = position + 10; 
+      position = position + 100; 
+      
+      // Define if the gift is in the press area
+      if(position_minimum <= position  &&  position <= position_maximun){
+        position_status = 450;
+         ///////////////////////////////////////////////////////////////////////////////////////////////
+        //console.log('%c appuie', 'background-color: green; padding: 5px');
+         ///////////////////////////////////////////////////////////////////////////////////////////////
+
+      } else if (position_maximun <= position) {
+        position = 0;
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        //console.log('%c appuie', 'background-color: blue; padding: 5px');
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+      } 
+
       ///////////////////////////////////////////////////////////////////////////////////////////////
       //console.log(position + 'px');
       ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -237,40 +257,44 @@ function gift_move() {
 */
 
 oxo.inputs.listenKeys([ `q`], function(key) {
+  clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
-  if(spawners_select[0] === spawners_select[fireplace_select]) {
   console.log('q');
+  if(spawners_select[0] === spawners_select[fireplace_select]) {
   score();
   }
 });
 
 
 oxo.inputs.listenKeys([ `s`], function(key) {
+  clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
+  console.log('s');
   if(spawners_select[1] === spawners_select[fireplace_select]) {
-    console.log('s');
     score();
   }
 });
 
 
 oxo.inputs.listenKeys([ `d`], function(key) {
+  clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
+  console.log('d');
   if(spawners_select[2] === spawners_select[fireplace_select]) {
-    console.log('d');
     score();
   }
 });
 
 
 oxo.inputs.listenKeys([ `f`], function(key) {
+  clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
+  console.log('f');
   if(spawners_select[3] === spawners_select[fireplace_select]) {
-    console.log('f');
     score();
   }
 });
@@ -282,7 +306,7 @@ oxo.inputs.listenKeys([ `f`], function(key) {
 
 function score(){
   // Compare position
-  if (position_minimum <= position  &&  position <= position_final) {
+  if (position_minimum <= position_status  &&  position_status <= position_maximun) {
     if (character.classList.contains(`bad`)){
       health--;
       health_select[health].classList.remove(`health`);
@@ -297,7 +321,7 @@ function score(){
 
       //spawners_select[fireplace_select].classList.add(`present--noAccept`);
       // Add to score
-      oxo.player.addTScore(5);
+      oxo.player.addToScore(5);
       speed = speed- 30;
       
       // One time for each gift
