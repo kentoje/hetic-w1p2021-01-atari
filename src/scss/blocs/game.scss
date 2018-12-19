@@ -1,5 +1,6 @@
 
 /* Game Area */
+/* 
 .game__area {
   width: 1366px;
   height: 750px;
@@ -9,7 +10,7 @@
   justify-content: space-between;
   position: relative;
 }
-
+ */
 .path{
   background-color: red;
   height: 600px;
@@ -17,9 +18,11 @@
 }
 
 .health{
-  background-color: red;
-  border: 1px solid black;
-  height: 50px;
-  width: 50px;
-  margin-top: 10px;
-}
+  
+  background-image: url(../img/SVG/coint.svg);
+  background-repeat: no-repeat;
+
+  height: 200%;
+  width: 20px;
+  margin-right: 10px;
+} 

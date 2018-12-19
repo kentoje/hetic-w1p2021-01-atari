@@ -25,7 +25,11 @@ let initial; // Value Initial Game
 let position; // Actual Position Gift
 let position_minimum  = 500; // Initial Position
 let position_final = 700; // Finak Position
-let gift_statut = ['good', 'bad']; // Define if the gift is good or bad
+
+let gift_color_array = ['red', 'yellow', 'green', 'black'];
+let gift_color_select;
+
+let gift_statut = ['present--good good', 'present--bad bad']; // Define if the gift is good or bad
 let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
 let bonus; // Add a bonus
@@ -133,7 +137,7 @@ function level(){
   speed = speed- 30;
   spawn();
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  console.log( speed + " speed");
+  //console.log( speed + " speed");
   //console.log( speed_gift + " level");
   ///////////////////////////////////////////////////////////////////////////////////////////////
 }
@@ -144,6 +148,10 @@ function level(){
 
 function spawn() {
   //console.log('spawn');
+
+  
+  gift_color_select = oxo.utils.getRandomNumber(0, 3);
+
 
   //  Choose a random spawner
   fireplace_select = oxo.utils.getRandomNumber(0, 3);
@@ -158,20 +166,9 @@ function spawn() {
 
   //  Add a random gift and define 1 ID for each
   NbGifts++;
-  //spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts"></div>`;
-  
-  spawners_select[fireplace_select].innerHTM = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present"><div class="present__image"><div class="present__value present__value--coint"><img src="../img/SVG/coint.svg"></div><div class="present__value present__value--boom"><img src="../img/SVG/boom.svg"></div></div></div></div>`
+  spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present present--${gift_color_array[gift_color_select]}"></div>`;
   
   
-  
-    
-  
-  
-    
- 
-
-
-
 
 
   //  Select the last id was created
@@ -181,7 +178,7 @@ function spawn() {
   gift_move();
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  console.log( spawners_select[fireplace_select]);
+  //console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
   //console.log(character);
   //console.log(position = oxo.animation.getPosition(character));
@@ -280,12 +277,16 @@ function score(){
         
       } 
     } else {
+
+      //spawners_select[fireplace_select].classList.add(`present--noAccept`);
+
       // Add to score
       oxo.player.addToScore(5);
       speed = speed- 30;
       
       // One time for each gift
       position = 0;
+      
     }
   } 
 }

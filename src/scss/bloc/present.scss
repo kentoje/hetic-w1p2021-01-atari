@@ -1,8 +1,11 @@
 .present{
   width: 4.8vw;
   height: 6vw;
-  top: 15vw;
+  /* top: 15vw;
   position: absolute;
+  z-index: 3; */
+  /* background-image: url(../img/SVG/present--red.svg); */
+  background-repeat: no-repeat;
   
   .present__value{
     position: absolute;
@@ -14,16 +17,22 @@
   }
 
   .present__image{
-    position: absolute;
-    z-index: 3;
-    width: 100%;
-    height: 100%;
-    background-image: url(../img/SVG/present--red.svg);
-    background-repeat: no-repeat;
+    
   }
+  &.present--red {
+    background-image: url(../img/SVG/present--red.svg);
+  }
+  &.present--green {
+    background-image: url(../img/SVG/present--green.svg);
+  }
+  &.present--yellow {
+    background-image: url(../img/SVG/present--yellow.svg);
+  }
+
 }
 
 .present--bad{
+  background-image: url(../img/SVG/present--black.svg);
   &::after{
     @include pseudo--absolute;
     width: 60%;
@@ -40,7 +49,7 @@
 
 .present--accept{
   left:50vw;
-
+  background-color: #fff;
   .present__image{
     @keyframes present--scale {
       from{ transform: scale(1)}
@@ -86,6 +95,7 @@
 }
 
 .present--noAccept{
+  background-color: red;
   left:30vw;
   .present__value--coint{
     display: none;
