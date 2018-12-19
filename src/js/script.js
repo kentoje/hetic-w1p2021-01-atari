@@ -1,3 +1,5 @@
+import { cpus } from "os";
+
 /*
 * Project : JS
 * Date : 17/12/2018
@@ -18,7 +20,7 @@ let initial; // Value Initial Game
 let position_minimum  = 500; // Initial Position
 let position_final = 600; // Finak Position
 let gift_statut = ['good', 'bad']; // Define if the gift is good or bad
-let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
+let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[1]}`, `gift_2 ${gift_statut[1]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
 let bonus; // Add a bonus
 //let gift_check; // Check gift statue
@@ -35,11 +37,13 @@ let laser; // Define the laser ID
 let health = 3; // Nb of life
 let health_array = [`health_0`, `health_2`, `health_3`]
 let health_select;
+
 let speed = 3000; // Speed games
 let timer = 10;  //Game Timer
 let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
 let timer_laser = 10; // Timer Laser
+let position_refresh = 10;
 //
 
 /* 
@@ -145,9 +149,20 @@ function spawn() {
   position = oxo.animation.getPosition(character);
   
 
+  /* 
+  if(character.className === `bad`){
+    console.log('bad');
+    
+  }else {
+    console.log('good');
+  }
+ */
+  
+
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //console.log( spawners_select[fireplace_select]);
-  console.log(character);
+  //console.log(character.className === `bad`);
+  //console.log(character);
   //console.log(position = oxo.animation.getPosition(character));
   //console.log(position.x);
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +197,6 @@ oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
   ///console.log('bad');
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
-
   } else {
     //Check the gift and add point
     if(key === `q`){
@@ -209,7 +223,7 @@ oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
       }
     }
     
-    if(key === `f`){ddd
+    if(key === `f`){
       if (position_minimum <= position.y  &&  position.y <= position_final) {
         // Add to score
         oxo.player.addToScore(5);
