@@ -25,7 +25,7 @@ let initial; // Value Initial Game
 let position; // Actual Position Gift
 let position_minimum  = 500; // Initial Position
 let position_final = 700; // Finak Position
-
+let countdown_start;
 let gift_color_array = ['red', 'yellow', 'green', 'black'];
 let gift_color_select;
 
@@ -62,10 +62,25 @@ let audio_background;
 * Load the game when enter is press
 */
 
-//oxo.inputs.listenKey('enter', function() {
+oxo.inputs.listenKey('enter', function() {
   // do something
-  oxo.screens.loadScreen(`game`, function() {
-    // game.html is loaded, do something
+  oxo.screens.loadScreen(`end`, function() {
+  // game.html is loaded, do something
+
+  //Select countdown_start
+  countdown_start = document.getElementById(`countdown_start`);
+
+  //  Show  countdown when the party starts 
+  let timeleft = 3;
+  let time_start_interval = setInterval(function(){
+    let time_start = [`GO`, `1`,`2`,`3`];
+    console.log(time_start[timeleft]);
+    countdown_start.innerHTML = `${time_start[timeleft]}`
+    timeleft--;
+    if(timeleft < 0)
+      clearInterval(time_start_interval);
+  },1000);
+
 
     //Select spawners
     spawners_select = document.querySelectorAll(`.game__area .spawner .spawner__position`);
@@ -86,7 +101,7 @@ let audio_background;
     //Load start Function
     start();
   });  
-//});  
+});  
 //
 
 
@@ -279,9 +294,8 @@ function score(){
     } else {
 
       //spawners_select[fireplace_select].classList.add(`present--noAccept`);
-
       // Add to score
-      oxo.player.addToScore(5);
+      oxo.player.addTScore(5);
       speed = speed- 30;
       
       // One time for each gift

@@ -3,7 +3,7 @@
   width: 10vw;
   bottom: 1vw;
   left:10vw;
-  z-index: 4;
+  z-index: 5;
   .snowman__head{
     position: absolute;
     top: -7vw;
@@ -29,4 +29,5 @@
 .snow--onTheGround{
   position: absolute;
   bottom: 0;
+  z-index: 4;
 }

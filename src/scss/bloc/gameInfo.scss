@@ -27,13 +27,13 @@
           from   {width:100%;}
           to   {width:0%;}
         }
-        animation: timebar 120s forwards;
+        animation: timebar 90s 4.5s forwards;
         position: absolute;
         top:0;
         background-color: $color--bg;
         content: "";
         width: 100%;
-        height: 20px;
+        height: 18px;
       }
     }
   }
@@ -42,7 +42,31 @@
   width: 46%;
   left: 27%;
   height: 2px;
-  top: 600px;
+  top: 500px;
   position: absolute;
   background-color: #fff;
+}
+
+.countdown{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  width:40%;
+  left:30%;
+  top: 35vh;
+  position: absolute;
+  animation: countdown 4.5s linear;
+  opacity: 0;
+  @keyframes countdown{
+    0%   {transform: scale(1); opacity: 0;}
+    12%  {transform: scale(1.5); opacity: 1;}
+    24%   {transform: scale(1); opacity: 0;}
+    36%  {transform: scale(1.5); opacity: 1;}
+    48%   {transform: scale(1); opacity: 0;}
+    60%  {transform: scale(1.5); opacity: 1;}
+    72%   {transform: scale(1); opacity: 0;}
+    84%  {transform: scale(1.5); opacity: 1;}
+    100%   {transform: scale(1); opacity: 0;}
+  }
 }

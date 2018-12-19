@@ -3,7 +3,7 @@
   position: relative;
   width: 80%;
   margin: 0 auto;
-  margin-top: 100px;
+ 
   .house__roof{ 
     top: 0;
     /*
@@ -36,6 +36,11 @@
   }
 }
 
+/*
+.site--game .house{
+  margin-top: 100px;
+} 
+*/
 
 .window{
   position: absolute;

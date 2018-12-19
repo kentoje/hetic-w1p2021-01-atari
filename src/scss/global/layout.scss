@@ -25,10 +25,15 @@
 .section--game{
   position: relative;
   height: 72vh;
+  
+}
+.site--game .section--game {
+   margin-top: 100px;
 }
 .section--house{
   position: relative;
   height: auto;
   height: 50.3vw;
   overflow-y: hidden;
+ 
 }
