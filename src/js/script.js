@@ -64,43 +64,45 @@ let audio_background;
 
 oxo.inputs.listenKey('enter', function() {
   // do something
-  oxo.screens.loadScreen(`end`, function() {
-  // game.html is loaded, do something
+  if (oxo.screens.getCurrentScreen !== 'game') {
+    oxo.screens.loadScreen(`game`, function() {
+    // game.html is loaded, do something
 
-  //Select countdown_start
-  countdown_start = document.getElementById(`countdown_start`);
+    //Select countdown_start
+    countdown_start = document.getElementById(`countdown_start`);
 
-  //  Show  countdown when the party starts 
-  let timeleft = 3;
-  let time_start_interval = setInterval(function(){
-    let time_start = [`GO`, `1`,`2`,`3`];
-    console.log(time_start[timeleft]);
-    countdown_start.innerHTML = `${time_start[timeleft]}`
-    timeleft--;
-    if(timeleft < 0)
-      clearInterval(time_start_interval);
-  },1000);
+    //  Show  countdown when the party starts 
+    let timeleft = 3;
+    let time_start_interval = setInterval(function(){
+      let time_start = [`GO`, `1`,`2`,`3`];
+      console.log(time_start[timeleft]);
+      countdown_start.innerHTML = `${time_start[timeleft]}`
+      timeleft--;
+      if(timeleft < 0)
+        clearInterval(time_start_interval);
+    },1000);
 
 
-    //Select spawners
-    spawners_select = document.querySelectorAll(`.game__area .spawner .spawner__position`);
+      //Select spawners
+      spawners_select = document.querySelectorAll(`.game__area .spawner .spawner__position`);
 
-    //Select health
-    health_select = document.querySelectorAll(`.health`);
+      //Select health
+      health_select = document.querySelectorAll(`.health`);
 
-    //Select laser
-    laser = document.getElementById(`laser`);
+      //Select laser
+      laser = document.getElementById(`laser`);
 
-    //Select audio
-    audio_background = document.getElementById('song_background');
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    //console.log(health_select);
-    //console.log('spawners_select  '+ spawners_select);
-    ///////////////////////////////////////////////////////////////////////////////////////////////
+      //Select audio
+      audio_background = document.getElementById('song_background');
+      ///////////////////////////////////////////////////////////////////////////////////////////////
+      //console.log(health_select);
+      //console.log('spawners_select  '+ spawners_select);
+      ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Load start Function
-    start();
-  });  
+      //Load start Function
+      start();
+    }); 
+  } 
 });  
 //
 
@@ -195,7 +197,7 @@ function spawn() {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
-  //console.log(character);
+  console.log(character);
   //console.log(position = oxo.animation.getPosition(character));
   //console.log(position.x);
   ///////////////////////////////////////////////////////////////////////////////////////////////
