@@ -33,7 +33,8 @@ let move;
 let fireplace_select; //Choose the fireplace
 let laser; // Define the laser ID
 let health = 3; // Nb of life
-
+let health_array = [`health_0`, `health_2`, `health_3`]
+let health_select;
 let speed = 3000; // Speed games
 let timer = 10;  //Game Timer
 let speed_gift = null; //Game stop
@@ -53,9 +54,13 @@ let timer_laser = 10; // Timer Laser
     //Select spawners
     spawners_select = document.querySelectorAll(`.game__area .spawner .spawner__position`);
 
+    //Select health
+    health_select = document.querySelectorAll(`.health`);
+
     //Select laser
     laser = document.getElementById(`laser`);
     ///////////////////////////////////////////////////////////////////////////////////////////////
+    //console.log(health_select);
     //console.log('spawners_select  '+ spawners_select);
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -170,6 +175,7 @@ oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
   //Check if the gift status
   if(character.className === `bad`){
     health--;
+    health_select[health].classList.remove(`health`);
     speed = speed- 15;
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
