@@ -7,9 +7,16 @@ import { cpus } from "os";
 */
 
 /*
-* Demander setInterval -> s'arrêter et gagner de la vitesse
-* Demander Positionnement temps réel
-* Demander pour BAD and GOOD
+* TODO:
+*
+* FIXME: Demander setInterval -> s'arrêter et gagner de la vitesse
+*
+* FIXME: Demander Positionnement temps réel
+*        Demander refresh de chaque
+*
+* FIXME: Demander pour BAD and GOOD
+*
+* FIXME: Demander music
 */
 
 /* 
@@ -17,6 +24,7 @@ import { cpus } from "os";
 */
 
 let initial; // Value Initial Game
+let position; // Actual Position Gift
 let position_minimum  = 500; // Initial Position
 let position_final = 600; // Finak Position
 let gift_statut = ['good', 'bad']; // Define if the gift is good or bad
@@ -29,13 +37,12 @@ let spawnTest;
 let turnInterval; // The periodic call to the turn function
 let NbGifts = 0; // Total of gifts
 let character;  // Define the active gift
-let position;
 let initialY;
 let move;
 let fireplace_select; //Choose the fireplace
 let laser; // Define the laser ID
 let health = 3; // Nb of life
-let health_array = [`health_0`, `health_2`, `health_3`]
+let health_array = [`health_0`, `health_1`, `health_2`]
 let health_select;
 
 let speed = 3000; // Speed games
@@ -44,6 +51,8 @@ let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
 let timer_laser = 10; // Timer Laser
 let position_refresh = 10;
+let refresh;
+let refresh_timer;
 //
 
 /* 
@@ -80,6 +89,10 @@ let position_refresh = 10;
 */
 
 function start(){
+  // Music
+  let player = new Audio('../song/song.mp3')
+  player.play();
+
   speed_gift = setInterval(level, speed);
   speed_timer = setInterval(count, 1000);
 }	
@@ -105,6 +118,10 @@ function count() {
 
 function finish() {
   clearInterval(speed_timer);
+  clearInterval(refresh);
+  clearInterval(refresh_timer);
+  console.log('finish');
+  clearInterval(speed_gift);
 }
 
 /*
@@ -112,8 +129,6 @@ function finish() {
 */
 
 function level(){
-  clearInterval(speed_gift);
-  speed_gift++;
   //Incrase level
   speed = speed- 300;
   spawn();
@@ -128,6 +143,7 @@ function level(){
 */
 
 function spawn() {
+  console.log('spawn');
 
   //  Choose a random spawner
   fireplace_select = oxo.utils.getRandomNumber(0, 3);
@@ -146,17 +162,25 @@ function spawn() {
   
   //  Select the last id was created
   character = document.getElementById(`gift_moving_${NbGifts}`);
-  position = oxo.animation.getPosition(character);
-  
 
-  /* 
-  if(character.className === `bad`){
+  //Check position gift
+  gift_move();
+
+  //Refresh position
+ /*  
+    refresh = setInterval(function(){
+    position = oxo.animation.getPosition(character);
+    console.log(position.y);
+  }, position_refresh);
+  */
+
+
+  if(character.classList.contains(`bad`)){
     console.log('bad');
     
   }else {
     console.log('good');
   }
- */
   
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,6 +193,29 @@ function spawn() {
   
 }
 //
+
+/**
+ * Keyframe 
+ * Define the t 
+ */
+
+function gift_move() {
+  // Id use is Character
+  position = 0;
+
+  refresh_timer = setInterval(frame, 30);
+  function frame() {
+    if (position == position_final) {
+      clearInterval(refresh_timer);
+    } else {
+      position = position + 10; 
+      ///////////////////////////////////////////////////////////////////////////////////////////////
+      //console.log(position + 'px');
+      ///////////////////////////////////////////////////////////////////////////////////////////////
+    }
+  }
+}
+
 
 /*
 * Keys write
@@ -193,6 +240,10 @@ oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
     health_select[health].classList.remove(`health`);
     speed = speed- 15;
 
+    //Arrête la partie
+    if(health === 0){
+      finish();
+    }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   ///console.log('bad');
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,26 +251,35 @@ oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
   } else {
     //Check the gift and add point
     if(key === `q`){
-      if (position_minimum <= position.y  &&  position.y <= position_final) {
+      if (position_minimum <= position  &&  position <= position_final) {
         // Add to score
         oxo.player.addToScore(5);
         speed = speed- 30;
+
+        // One time for each gift
+        position = 0;
       }
     }
     
     if(key === `s`){
-      if (position_minimum <= position.y  &&  position.y <= position_final) {
+      if (position_minimum <= position  &&  position <= position_final) {
         // Add to score 
         oxo.player.addToScore(5);
         speed = speed- 30;
+
+        // One time for each gift
+        position = 0;
       }
     }
     
     if(key === `d`){
-      if (position_minimum <= position.y  &&  position.y <= position_final) {
+      if (position_minimum <= position  &&  position <= position_final) {
         // Add to score
         oxo.player.addToScore(5);
         speed = speed- 30;
+
+        // One time for each gift
+        position = 0;
       }
     }
     
@@ -228,6 +288,9 @@ oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
         // Add to score
         oxo.player.addToScore(5);
         speed = speed- 30;
+
+        // One time for each gift
+        position = 0;
       }
     }
   }
