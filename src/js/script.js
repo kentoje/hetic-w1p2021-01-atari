@@ -53,6 +53,7 @@ let timer_laser = 10; // Timer Laser
 let position_refresh = 10;
 let refresh;
 let refresh_timer;
+let audio_background;
 //
 
 /* 
@@ -72,6 +73,9 @@ let refresh_timer;
 
     //Select laser
     laser = document.getElementById(`laser`);
+
+    //Select audio
+    audio_background = document.getElementById('song_background');
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //console.log(health_select);
     //console.log('spawners_select  '+ spawners_select);
@@ -92,7 +96,7 @@ function start(){
   // Music
   //let player = new Audio('../song/song.mp3')
   //player.play();
-
+  audio_background.play();
   speed_gift = setInterval(level, speed);
   speed_timer = setInterval(count, 1000);
 }	
