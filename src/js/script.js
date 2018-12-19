@@ -28,7 +28,7 @@ let position; // Actual Position Gift
 let position_minimum  = 500; // Initial Position
 let position_final = 600; // Finak Position
 let gift_statut = ['good', 'bad']; // Define if the gift is good or bad
-let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[1]}`, `gift_2 ${gift_statut[1]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
+let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
 let bonus; // Add a bonus
 //let gift_check; // Check gift statue
@@ -46,7 +46,7 @@ let health_array = [`health_0`, `health_1`, `health_2`]
 let health_select;
 
 let speed = 3000; // Speed games
-let timer = 10;  //Game Timer
+let timer = 130;  //Game Timer
 let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
 let timer_laser = 10; // Timer Laser
@@ -90,8 +90,8 @@ let refresh_timer;
 
 function start(){
   // Music
-  let player = new Audio('../song/song.mp3')
-  player.play();
+  //let player = new Audio('../song/song.mp3')
+  //player.play();
 
   speed_gift = setInterval(level, speed);
   speed_timer = setInterval(count, 1000);
@@ -102,11 +102,7 @@ function count() {
   if(timer == 0){
     finish();
 
-    // Load End game
-    /* 
-    oxo.screens.loadScreen('end', function() {
-    });
-    */
+
   } 
   else {
     // WHile time != 0 do :
@@ -117,10 +113,13 @@ function count() {
 }
 
 function finish() {
+  // Load End game
+    
+  oxo.screens.loadScreen('end', function() {});
+    
   clearInterval(speed_timer);
   clearInterval(refresh);
   clearInterval(refresh_timer);
-  console.log('finish');
   clearInterval(speed_gift);
 }
 
@@ -166,22 +165,22 @@ function spawn() {
   //Check position gift
   gift_move();
 
-  //Refresh position
- /*  
-    refresh = setInterval(function(){
-    position = oxo.animation.getPosition(character);
-    console.log(position.y);
-  }, position_refresh);
-  */
-
-
-  if(character.classList.contains(`bad`)){
+  if (character.classList.contains(`bad`)){
     console.log('bad');
-    
-  }else {
+  }
+    else {
     console.log('good');
   }
-  
+
+
+
+
+
+
+
+
+
+
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //console.log( spawners_select[fireplace_select]);
@@ -196,7 +195,7 @@ function spawn() {
 
 /**
  * Keyframe 
- * Define the t 
+ * Define the position of gift
  */
 
 function gift_move() {
@@ -225,80 +224,70 @@ function gift_move() {
 * f : fireplace_3
 */
 
-oxo.inputs.listenKeys([ `q`, `s`, `d`, `f`], function(key) {
-
-  // Visual Effect
-  laser.classList.add(`laser`);
-  // Disapear laser after a delay
-  setTimeout(function() {
-    laser.classList.remove(`laser`);
-  }, timer_laser);
-
-  //Check if the gift status
-  if(character.className === `bad`){
-    health--;
-    health_select[health].classList.remove(`health`);
-    speed = speed- 15;
-
-    //Arrête la partie
-    if(health === 0){
-      finish();
-    }
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  ///console.log('bad');
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-
-  } else {
-    //Check the gift and add point
-    if(key === `q`){
-      if (position_minimum <= position  &&  position <= position_final) {
-        // Add to score
-        oxo.player.addToScore(5);
-        speed = speed- 30;
-
-        // One time for each gift
-        position = 0;
-      }
-    }
-    
-    if(key === `s`){
-      if (position_minimum <= position  &&  position <= position_final) {
-        // Add to score 
-        oxo.player.addToScore(5);
-        speed = speed- 30;
-
-        // One time for each gift
-        position = 0;
-      }
-    }
-    
-    if(key === `d`){
-      if (position_minimum <= position  &&  position <= position_final) {
-        // Add to score
-        oxo.player.addToScore(5);
-        speed = speed- 30;
-
-        // One time for each gift
-        position = 0;
-      }
-    }
-    
-    if(key === `f`){
-      if (position_minimum <= position.y  &&  position.y <= position_final) {
-        // Add to score
-        oxo.player.addToScore(5);
-        speed = speed- 30;
-
-        // One time for each gift
-        position = 0;
-      }
-    }
-  }
+oxo.inputs.listenKeys([ `q`], function(key) {
   
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  //console.log('good');
-  //console.log(key);
-  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // Compare the tower was selected
+  if(spawners_select[0] === spawners_select[fireplace_select]) {
+    console.log('q');
+    score();
+  }
 });
-//
 
+
+oxo.inputs.listenKeys([ `s`], function(key) {
+  
+  // Compare the tower was selected
+  if(spawners_select[1] === spawners_select[fireplace_select]) {
+    console.log('s');
+    score();
+  }
+});
+
+
+oxo.inputs.listenKeys([ `d`], function(key) {
+  
+  // Compare the tower was selected
+  if(spawners_select[2] === spawners_select[fireplace_select]) {
+    console.log('d');
+    score();
+  }
+});
+
+
+oxo.inputs.listenKeys([ `f`], function(key) {
+  
+  // Compare the tower was selected
+  if(spawners_select[3] === spawners_select[fireplace_select]) {
+    console.log('f');
+    score();
+  }
+});
+
+
+/*
+* Add score or end game
+*/
+
+function score(){
+  // Compare position
+  if (position_minimum <= position  &&  position <= position_final) {
+    if (character.classList.contains(`bad`)){
+      health--;
+      health_select[health].classList.remove(`health`);
+      speed = speed- 15;
+
+      //Arrête la partie
+      if(health === 0){
+        finish();
+
+      } 
+    } else {
+      // Add to score
+      oxo.player.addToScore(5);
+      speed = speed- 30;
+
+      // One time for each gift
+      position = 0;
+    }
+  } 
+}
