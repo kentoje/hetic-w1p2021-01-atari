@@ -1,7 +1,10 @@
 .wrapper{
   font-family: sans-serif;
-  background-color: $color--bg;
   @include snowStorm(url(../img/SVG/snowFlakes-3.svg),url(../img/SVG/snowFlakes-4.svg));
+}
+
+.background--color {
+  background-color: $color--bg;
 }
 
 @keyframes snow { 

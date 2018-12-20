@@ -11,6 +11,8 @@
 *
 * FIXME: Demander getID
 *
+* FIXME: Demander overflow
+*
 */
 
 /* setTimeout(function(){
@@ -55,6 +57,9 @@ let laser; // Define the laser ID
 let health = 3; // Nb of life
 let health_array = [`health_0`, `health_1`, `health_2`]
 let health_select;
+let snow_life;
+let wrapper_select;
+
 
 let speed = 1000; // Speed spawn gifts
 let timer = 90;  //Game Timer
@@ -65,7 +70,7 @@ let position_refresh = 10;
 let refresh;
 let refresh_timer;
 let audio_background; // Variable Background Song
-let audio_laser; // Laser sound
+let audio_laser; // Laser soundù
 //
 
 /* 
@@ -80,6 +85,11 @@ oxo.inputs.listenKey('enter', function() {
 
     //Select countdown_start
     countdown_start = document.getElementById(`countdown_start`);
+
+
+    // Get Snow
+    wrapper_select = document.getElementById(`game__area_snow`);
+    
 
     //  Show  countdown when the party starts 
     let timeleft = 3;
@@ -101,6 +111,9 @@ oxo.inputs.listenKey('enter', function() {
       //Select laser
       laser = document.getElementById(`laser`);
 
+      //Select snow div
+      snow_life = document.querySelectorAll(`.snow_life`);
+      console.log(snow_life);
       //Select audio
       audio_background = document.getElementById('song_background');
       audio_laser = document.getElementById('song_laser');
@@ -236,19 +249,19 @@ function gift_move() {
       if(position_minimum <= position  &&  position <= position_maximun){
         position_status = 450;
         /////////////////////////////////////////////////////////////////////////////////////////////
-        console.log('%c appuie', 'background-color: green; padding: 5px');
+        //console.log('%c appuie', 'background-color: green; padding: 5px');
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
       } else if (position_maximun <= position) {
         position = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////////
-        console.log('%c appuie', 'background-color: blue; padding: 5px');
+        //console.log('%c sortie', 'background-color: blue; padding: 5px');
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
       } 
 
       ///////////////////////////////////////////////////////////////////////////////////////////////
-      console.log(position + 'px');
+      //console.log(position + 'px');
       ///////////////////////////////////////////////////////////////////////////////////////////////
     }
   }
@@ -319,7 +332,7 @@ function score(){
 
     // Check
     spawners_select[fireplace_select].classList.add(`check`);
-    console.log(spawners_select[fireplace_select]);
+    //console.log(spawners_select[fireplace_select]);
     
     if (character.classList.contains(`bad`)){
       health_counter();
@@ -361,6 +374,11 @@ function health_counter(){
   health_select[health].classList.remove(`health`);
   speed = speed- 15;
   
+   wrapper_select.classList.remove(`wrapper`);
+
+
+
+  snow_life[health].classList.add(`disturber--snow`);
   //Arrête la partie
   if(health === 0){
     finish();
