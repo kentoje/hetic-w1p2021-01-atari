@@ -16,19 +16,20 @@
 *
 */
 
-/* setTimeout(function(){
+oxo.screens.loadScreen('home', function() {
   let rules = document.getElementById(`rules`);
   let info = document.getElementById(`info`);
+
+  rules.addEventListener('click', function() {
+    rules.classList.toggle('infoBox--active');
+  });
+  
+  info.addEventListener('click', function() {
+    info.classList.toggle('infoBox--active');
+  }); 
 });
 
-rules.addEventListener('click', function() {
-  rules.classList.toggle('infoBox--active');
-});
 
-info.addEventListener('click', function() {
-  info.classList.toggle('infoBox--active');
-}); 
- */
 
  /* 
 * Variable
@@ -36,8 +37,8 @@ info.addEventListener('click', function() {
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 450; // Initial Position
-let position_maximun = 550; // Maximun position
+let position_minimum  = 200; // Initial Position
+let position_maximun = 400; // Maximun position
 let position_final = 700; // Finak Position
 let position_status;
 let countdown_start;
@@ -66,12 +67,13 @@ let speed = 1000; // Speed spawn gifts
 let timer = 90;  //Game Timer
 let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
-let timer_laser = 200; // Timer Laser
+let timer_laser = 1000; // Timer Laser
 let position_refresh = 10;
 let refresh;
 let refresh_timer;
 let audio_background; // Variable Background Song
 let audio_laser; // Laser soundù
+let gift;
 //
 
 /* 
@@ -80,8 +82,8 @@ let audio_laser; // Laser soundù
 
 oxo.inputs.listenKey('enter', function() {
   // do something
-  if (oxo.screens.getCurrentScreen !== 'end') {
-    oxo.screens.loadScreen(`end`, function() {
+  if (oxo.screens.getCurrentScreen !== 'game') {
+    oxo.screens.loadScreen(`game`, function() {
     // game.html is loaded, do something
 
     //Select countdown_start
@@ -109,8 +111,6 @@ oxo.inputs.listenKey('enter', function() {
       //Select laser
       laser = document.getElementById(`deer_arm`);
       
-    console.log(laser);
-      
     //Select snow div
     snow_life = document.querySelectorAll(`.snow_life`);
     
@@ -129,8 +129,6 @@ oxo.inputs.listenKey('enter', function() {
       laser.classList.remove(`deer__arm--start`);
       laser.classList.remove(`deer__arm--shoot`);
       laser.classList.add(`deer__arm--up`);
-      
-      console.log(laser);
       start();
         }, 4500);
     }); 
@@ -147,11 +145,11 @@ function start(){
   //player.play();
   audio_background.play();
   
-  speed_gift = setInterval(level, speed);
   speed_timer = setInterval(count, 1000);
 }	
 
 function count() {
+  level();
   timer--;
   if(timer == 0){
     finish();
@@ -169,9 +167,13 @@ function count() {
 
 function finish() {
   // Load End game
-    
-  oxo.screens.loadScreen('end', function() {});
-    
+/*     
+  oxo.screens.loadScreen('end', function() {
+    let test = document.getElementById('top_bottom');
+    console.log(test);
+    document.getElementById('top_bottom').click();
+  });
+     */
   clearInterval(speed_timer);
   clearInterval(refresh);
   clearInterval(refresh_timer);
@@ -215,6 +217,22 @@ function spawn() {
   //  Add a random gift and define 1 ID for each
   //console.log(NbGifts);
   spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present "><div class="present__image present--${gift_color_array[gift_color_select]}"></div><div class="present__value present__value--coint"><img src=""></div></div>`;
+
+  gift = document.getElementById(`gift_moving_${NbGifts}`);
+
+  var giftInterval = setInterval(function() {
+    oxo.animation.move(gift, 'down', 10);
+    console.log(oxo.animation.getPosition(gift).y);
+  }, 10);
+
+  // When the gift go out of the screen
+  oxo.elements.onLeaveScreenOnce(gift, function() {
+    //console.log('OUT');
+    gift.remove();
+    clearInterval(giftInterval);
+  });
+
+
   
   
 
@@ -223,7 +241,7 @@ function spawn() {
   character = document.getElementById(`gift_moving_${NbGifts}`);
 
   //Check position gift
-  gift_move();
+  //gift_move();
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
@@ -235,46 +253,6 @@ function spawn() {
 }
 //
 
-/**
- * Keyframe 
- * Define the position of gift
- */
-
-function gift_move() {
-  // Id use is Character
-  position = 0;
-
-  refresh_timer = setInterval(frame, 100);
-  function frame() {
-    if (position == position_final) {
-      clearInterval(refresh_timer);
-    } else {
-      position = position + 100; 
-      
-      // Define if the gift is in the press area
-      if(position_minimum <= position  &&  position <= position_maximun){
-        position_status = 450;
-        /////////////////////////////////////////////////////////////////////////////////////////////
-        //console.log('%c appuie', 'background-color: green; padding: 5px');
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-      } else if (position_maximun <= position) {
-        position = 0;
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        //console.log('%c sortie', 'background-color: blue; padding: 5px');
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-      } 
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////
-      //console.log(position + 'px');
-      ///////////////////////////////////////////////////////////////////////////////////////////////
-    }
-  }
-  
-}
-
-
 /*
 * Keys write
 * q : fireplace_0
@@ -284,11 +262,17 @@ function gift_move() {
 */
 
 oxo.inputs.listenKeys([ `f`], function(key) {
+  //console.log(oxo.animation.getPosition(gift));
+  //console.log(oxo.animation.getPosition(gift).y);
+
   clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
   if(spawners_select[0] === spawners_select[fireplace_select]) {
     console.log('f');
+
+    console.log(oxo.animation.getPosition(gift));
+   
 
     score();
   }
@@ -322,6 +306,7 @@ oxo.inputs.listenKeys([ `j`], function(key) {
   laser_effect();
   // Compare the tower was selected
   if(spawners_select[3] === spawners_select[fireplace_select]) {
+    
     console.log('j');
     score();
   }
@@ -333,8 +318,12 @@ oxo.inputs.listenKeys([ `j`], function(key) {
 */
 
 function score(){
+  console.log('%c coucou', 'background-color: green; padding: 5px');
   // Compare position
-  if (position_minimum <= position_status  &&  position_status <= position_maximun) {
+
+  let marchestpfrr = oxo.animation.getPosition(gift).y;
+
+  if (position_minimum <= marchestpfrr  &&  marchestpfrr <= position_maximun) {
 
     // Check
     spawners_select[fireplace_select].classList.add(`check`);
