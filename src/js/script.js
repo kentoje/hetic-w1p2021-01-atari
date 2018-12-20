@@ -77,9 +77,9 @@ let audio_laser; // Laser soundù
 * Load the game when enter is press
 */
 
-oxo.inputs.listenKey('enter', function() {
+oxo.inputs.listenKey('end', function() {
   // do something
-  if (oxo.screens.getCurrentScreen !== 'game') {
+  if (oxo.screens.getCurrentScreen !== 'end') {
     oxo.screens.loadScreen(`game`, function() {
     // game.html is loaded, do something
 
