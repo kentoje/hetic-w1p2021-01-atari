@@ -181,6 +181,19 @@ function finish() {
     }
     let test = document.getElementById('top_bottom');
 
+
+    
+    let try_again = document.getElementById('try_again');
+    
+    
+    oxo.inputs.listenKeys([ `enter`], function(key) {
+      oxo.screens.loadScreen('home', function() {
+        console.log('go ');
+      });
+    });
+    
+    
+    
     setTimeout(function() {
       document.getElementById('top_bottom').click();
       //console.log('smooth');

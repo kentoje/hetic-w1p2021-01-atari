@@ -38,6 +38,15 @@
     p{
       margin-bottom: 15px;
     }
+    .infoBox--rules__fire{
+      width: 20%;
+      margin-top: 20px;
+    }
+
+    .infoBox__title {
+      text-decoration: underline;
+    }
+
     &.infoBox--active{
       height: auto;
       opacity: 1;
