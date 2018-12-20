@@ -37,8 +37,8 @@ oxo.screens.loadScreen('home', function() {
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 200; // Initial Position
-let position_maximun = 400; // Maximun position
+let position_minimum  = 400; // Initial Position
+let position_maximun = 500; // Maximun position
 let position_final = 700; // Finak Position
 let position_status;
 let countdown_start;
