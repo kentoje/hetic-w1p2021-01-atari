@@ -5,10 +5,15 @@
   margin-left: 20%;
   top: 10.8vw;
   justify-content:space-between;
-  font-family: 'Press Start 2P', cursive;
-  span{
+  span,div{
     display: block;
     margin-right: 10px;
+    font-family: 'Press Start 2P', cursive;
+  }
+  p{
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
   }
   .gameInfo__box{
     display: flex;

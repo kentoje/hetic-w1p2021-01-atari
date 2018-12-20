@@ -5,27 +5,26 @@
 */
 
 /*
-* TODO:
 *
-* FIXME: Demander NbGifts
-*
-* FIXME: Demander getID
-*
-*
-* FIXME: Demander pour cadeau vie en moins si pas cliqué
+* TODO: remettre les variables etc
 *
 */
+
+
 
 oxo.screens.loadScreen('home', function() {
   let rules = document.getElementById(`rules`);
   let info = document.getElementById(`info`);
 
+  let rules_show = document.getElementById(`rules_show`);
+  let info_show = document.getElementById(`info_show`);
+
   rules.addEventListener('click', function() {
-    rules.classList.toggle('infoBox--active');
+    rules_show.classList.toggle('infoBox--active');
   });
   
   info.addEventListener('click', function() {
-    info.classList.toggle('infoBox--active');
+    info_show.classList.toggle('infoBox--active');
   }); 
 });
 
@@ -37,8 +36,8 @@ oxo.screens.loadScreen('home', function() {
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 0; //400; // Initial Position
-let position_maximun = 600;//500; // Maximun position
+let position_minimum  = 100; //400; // Initial Position
+let position_maximun = 700;//500; // Maximun position
 let position_final = 700; // Finak Position
 let position_status;
 let countdown_start;
@@ -185,7 +184,7 @@ function finish() {
     setTimeout(function() {
       document.getElementById('top_bottom').click();
       //console.log('smooth');
-      }, 1000);
+    }, 1000);
 
 
   });
