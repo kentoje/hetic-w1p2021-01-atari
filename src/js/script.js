@@ -188,7 +188,7 @@ function finish() {
     
     oxo.inputs.listenKeys([ `enter`], function(key) {
       oxo.screens.loadScreen('home', function() {
-        console.log('go ');
+        window.location.href = "http://localhost:1234/index.html"; //https://christmas-hero.netlify.com/
       });
     });
     

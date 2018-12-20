@@ -37,9 +37,6 @@
       to   {transform: scale(1.1);}
     }
     animation: buttomScale 1s ease-in-out infinite alternate;
-    &:hover{
-      background-color: $color--bg;
-    }
   }
 }
 
