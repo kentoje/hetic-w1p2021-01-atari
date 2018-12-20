@@ -36,8 +36,8 @@ oxo.screens.loadScreen('home', function() {
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 100; //400; // Initial Position
-let position_maximun = 700;//500; // Maximun position
+let position_minimum  = 400; //400; // Initial Position
+let position_maximun = 600;//500; // Maximun position
 let position_final = 700; // Finak Position
 let position_status;
 let countdown_start;
@@ -76,6 +76,8 @@ let gift;
 //let end_id; // Choose the end
 let end_status = true;
 let end_id;
+let try_again;
+let frame_status;
 //
 
 /* 
@@ -104,14 +106,14 @@ oxo.inputs.listenKey('enter', function() {
     },1000);
 
 
-      //Select spawners
-      spawners_select = document.querySelectorAll(`.game__area .spawner .spawner__position`);
+    //Select spawners
+    spawners_select = document.querySelectorAll(`.game__area .spawner .spawner__position`);
 
-      //Select health
-      health_select = document.querySelectorAll(`.health`);
+    //Select health
+    health_select = document.querySelectorAll(`.health`);
 
-      //Select laser
-      laser = document.getElementById(`deer_arm`);
+    //Select laser
+    laser = document.getElementById(`deer_arm`);
       
     //Select snow div
     snow_life = document.querySelectorAll(`.snow_life`);
@@ -144,7 +146,7 @@ oxo.inputs.listenKey('enter', function() {
 */
 
 function start(){
-  //player.play();
+  //musique
   audio_background.play();
   
   speed_timer = setInterval(count, 1000);
@@ -171,24 +173,30 @@ function finish() {
   oxo.screens.loadScreen('end', function() {
 
     
-   end_id = document.getElementById(`end_type`);
-
+    end_id = document.getElementById(`end_type`);
+    console.log(end_id);
+    
+    //Title
+    frame_status = document.getElementById('frame_status');
+    
     // Choose the end
     if(end_status === true) {
       end_id.classList.add(`goodScore`);
     } else {
+
+      // Show the bad title if you loose
+      //frame_status.parentNode.removeChild(frame_status);
+      //frame_status.innerHTML = `<img id="frame_status" src="../img/SVG/gameOver.svg">`
+
       end_id.classList.add(`badScore`);
     }
     let test = document.getElementById('top_bottom');
-
-
-    
-    let try_again = document.getElementById('try_again');
-    
+  
+    try_again = document.getElementById('try_again');
     
     oxo.inputs.listenKeys([ `enter`], function(key) {
       oxo.screens.loadScreen('home', function() {
-        window.location.href = "http://localhost:1234/index.html"; //https://christmas-hero.netlify.com/
+        window.location.href = "https://christmas-hero.netlify.com/"; //http://localhost:1234/index.html
       });
     });
     
@@ -380,6 +388,7 @@ function score(){
  
 function laser_effect() {
   // Visual Effect
+  audio_background.play();
   laser.classList.add(`deer__arm--shoot`);
   // Disapear laser after a delay
   setTimeout(function() {
