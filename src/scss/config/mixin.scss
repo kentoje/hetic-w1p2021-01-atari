@@ -18,3 +18,15 @@
     }
   }
 }
+
+@mixin snowStorm($url1,$url2) {
+  //FIXME: snow
+  /* Snow inspired by Codepen Jonathan Ekström */ 
+  background-image: $url1,$url2;
+  animation: snowü 20s linear infinite;
+	right: 0;
+  top: 0;
+  left: 0;
+  bottom:0;
+	margin-top: 0;
+}

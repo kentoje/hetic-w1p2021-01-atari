@@ -1,85 +1,87 @@
-<body class="">
-  <div class="game badScore">
-    <section class="section--game">
 
-      <h1 class="title" alt="Christmas Hero">
+  <div class="wrapper badScore">
+    <section class="section--game">
+      <h1 class="title title--main" alt="Christmas Hero" title="Christmas Hero">
         <img src="../img/SVG/logo.svg">
       </h1>
-      
-
+      <img src="../img/SVG/enter.svg" class="title title--sub" alt="Press enter to start" title="Press enter to start" >
       <div class="infoBoxes">
-          <button id="rules" class="button infoBoxes__button infoBoxes__button--rules">Rules</button>
-          <div class="infoBox infoBox--rules ">
-            <p>C'etait un travaille du groupe bla bla bla</p>
-          </div>
-  
-          <button id="info" class="button infoBoxes__button infoBoxes__button--info">Info</button>
-          <div class="infoBox infoBox--info">
-            <p>Atari's group project designed while an intensive JavaScript week !</p>
-            <p>Développé à<br> HETIC W1P2021.</p>
-            <a href="https://github.com/christinastep/oxo-game-boilerplate">GitHub</a>
-          </div>
+        <button class="button infoBoxes__button infoBoxes__button--rules">Rules</button>
+        <div class="infoBox infoBox--rules infoBox--active">
+          <p>Instruction</p>
+          <p>Si le bla bla bla touche le lettre bla bla bla.</p>
+          <span class="border--keyboard">s</span>
+          <span class="border--keyboard">f</span>
+          <span class="border--keyboard">j</span>
+          <span class="border--keyboard">l</span>
+          <p>Et attention du cadeau avec le feu.</p>
         </div>
-
+        <button class="button infoBoxes__button infoBoxes__button--info">Info</button>
+        <div class="infoBox infoBox--info">
+          <p>Atari's group project designed while an intensive JavaScript week !</p>
+          <p>Développé à<br> HETIC W1P2021.</p>
+          <a href="https://github.com/christinastep/oxo-game-boilerplate">GitHub</a>
+        </div>
+      </div>
       <!-- Import the deer-->
       <div class="deer">
-          <div class="deer__head head">
-            <img class="head__corne head__corne--left" src="../img/SVG/geweih--left.svg">
-            <img class="head__corne head__corne--right" src="../img/SVG/geweih.svg">
-            <img class="head__ear head__ear--left" src="../img/SVG/ear.svg">
-            <img class="head__ear head__ear--right" src="../img/SVG/ear.svg">
-            <img class="head__face" src="../img/SVG/head.svg">
+        <div class="deer__head head">
+          <img class="head__corne head__corne--left" src="../img/SVG/geweih--left.svg">
+          <img class="head__corne head__corne--right" src="../img/SVG/geweih.svg">
+          <img class="head__ear head__ear--left" src="../img/SVG/ear.svg">
+          <img class="head__ear head__ear--right" src="../img/SVG/ear.svg">
+          <img class="head__face" src="../img/SVG/head.svg">
+        </div>
+        <img class="deer__body" src="../img/SVG/body.svg">
+        <div class="deer__arm">
+          <img class="deer__arm--shoot__image" src="../img/SVG/deer__arm.svg">
+          <div class="flash">
+            <img class="" src="../img/SVG/flash.svg">
           </div>
-          <img class="deer__body" src="../img/SVG/body.svg">
-          <div class="deer__arm">
-            <img class="deer__arm--shoot__image" src="../img/SVG/deer__arm.svg">
-            <div class="flash">
-              <img class="" src="../img/SVG/flash.svg">
-            </div>
-          </div>
+        </div>
       </div>
     </section>
-  
+
     <section class="section--house">
-        <div class="house house--GoodScore">
-          
-          <img class="house__roof" src="../img/SVG/roof-2.svg">²
-          <img class="house__snowBorder" src="../img/SVG/snow-border.svg">
-          <div class="house__wall"></div>
-          <div class="house__windows">
-            <div class="house__window window window--1 window--BadScore">
-              <img class="window__grid" src="../img/SVG/window--grid.svg">
-              <img class="window__border" src="../img/SVG/window--border.svg">
-            </div>
-            <div class="house__window window window--2">
-              <img class="window__grid" src="../img/SVG/window--grid.svg">
-              <img class="window__border" src="../img/SVG/window--border.svg">
-            </div>
-            <div class="house__window window window--3">
-              <img class="window__grid" src="../img/SVG/window--grid.svg">
-              <img class="window__border" src="../img/SVG/window--border.svg">
-            </div>
-            <div class="house__window window window--4">
-              <img class="window__grid" src="../img/SVG/window--grid.svg">
-              <img class="window__border" src="../img/SVG/window--border.svg">
-            </div>
+      <div class="house house--GoodScore"> 
+        <img class="house__roof" src="../img/SVG/roof-2.svg">²
+        <img class="house__snowBorder" src="../img/SVG/snow-border.svg">
+        <div class="house__wall"></div>
+        <div class="house__windows">
+          <div class="house__window window window--1 window--BadScore">
+            <img class="window__grid" src="../img/SVG/window--grid.svg">
+            <img class="window__border" src="../img/SVG/window--border.svg">
           </div>
-          <div class="scoreMessage">
-            <span class="scoreMessage__headline">Your Score</span>
-            <span class="scoreMessage__value">56</span>
-            <p class="scoreMessage__message">Do you want to try again</p>
-            <button class="button scoreMessage__button">Try again</button>
+          <div class="house__window window window--2">
+            <img class="window__grid" src="../img/SVG/window--grid.svg">
+            <img class="window__border" src="../img/SVG/window--border.svg">
+          </div>
+          <div class="house__window window window--3">
+            <img class="window__grid" src="../img/SVG/window--grid.svg">
+            <img class="window__border" src="../img/SVG/window--border.svg">
+          </div>
+          <div class="house__window window window--4">
+            <img class="window__grid" src="../img/SVG/window--grid.svg">
+            <img class="window__border" src="../img/SVG/window--border.svg">
           </div>
         </div>
-        <div class="snowman">
-          <img class="snowman__head" src="../img/SVG/snowman__Head.svg">
-          <img class="snowman__body" src="../img/SVG/snowman__body.svg">
-          <div class="snowman__arm">
-            <img class="" src="../img/SVG/snowman__hand.svg">
-          </div>
+        <div class="scoreMessage">
+          <span class="scoreMessage__headline">Your Score</span>
+          <span class="scoreMessage__value">56</span>
+          <p class="scoreMessage__message">Do you want to try again</p>
+          <button class="button scoreMessage__button">Try again</button>
         </div>
-        <img class="snow--onTheGround" src="../img/SVG/snow--floor.svg">
-      </section>
-  
+      </div>
+      <div class="snowman">
+        <img class="snowman__head" src="../img/SVG/snowman__Head.svg">
+        <img class="snowman__body" src="../img/SVG/snowman__body.svg">
+        <div class="snowman__arm">
+          <img class="" src="../img/SVG/snowman__hand.svg">
+        </div>
+      </div>
+      <img class="snow--onTheGround" src="../img/SVG/snow--floor.svg">
+    </section>
+  </div>
+
   
   

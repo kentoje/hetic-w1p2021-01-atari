@@ -119,3 +119,15 @@
     animation: presentNo 0.5s linear 0s forwards;
   }
 }
+
+@keyframes gift--falling{
+  from   {top:-100px;}
+  to   {top:500px;}
+}
+
+.gifts{
+  animation: gift--falling 1s ease-in;
+  //animation: gift--falling 0.5s ease-in;
+  position: absolute;
+  top: -100px;
+}

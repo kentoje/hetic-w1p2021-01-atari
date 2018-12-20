@@ -1,0 +1,6 @@
+.disturber--snow{
+  @include snowStorm(url(../img/SVG/snow--1.svg),url(../img/SVG/snow--2.svg));
+  position: absolute;
+  z-index: 999;
+  animation: snowü 10s linear infinite;
+}

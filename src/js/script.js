@@ -13,19 +13,21 @@
 *
 */
 
-
-/* 
-let rules = document.getElementById(`rules`).addEventListener('click', function() {
-  barre.classList.toggle('infoBox--active');
+/* setTimeout(function(){
+  let rules = document.getElementById(`rules`);
+  let info = document.getElementById(`info`);
 });
 
-let info = document.getElementById(`info`).addEventListener('click', function() {
-  barre.classList.toggle('infoBox--active');
+rules.addEventListener('click', function() {
+  rules.classList.toggle('infoBox--active');
 });
+
+info.addEventListener('click', function() {
+  info.classList.toggle('infoBox--active');
+}); 
  */
 
-
-/* 
+ /* 
 * Variable
 */
 
@@ -63,6 +65,7 @@ let position_refresh = 10;
 let refresh;
 let refresh_timer;
 let audio_background; // Variable Background Song
+let audio_laser; // Laser sound
 //
 
 /* 
@@ -100,6 +103,7 @@ oxo.inputs.listenKey('enter', function() {
 
       //Select audio
       audio_background = document.getElementById('song_background');
+      audio_laser = document.getElementById('song_laser');
       ///////////////////////////////////////////////////////////////////////////////////////////////
       //console.log(health_select);
       //console.log('spawners_select  '+ spawners_select);
@@ -174,9 +178,7 @@ function level(){
 */
 
 function spawn() {
-  //console.log('spawn');
-
-  
+  // Get the a random color
   gift_color_select = oxo.utils.getRandomNumber(0, 3);
 
 
@@ -192,7 +194,6 @@ function spawn() {
   `gift_3`);
 
   //  Add a random gift and define 1 ID for each
-  
   console.log(NbGifts);
   spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present present--${gift_color_array[gift_color_select]}"></div>`;
   
@@ -204,7 +205,6 @@ function spawn() {
 
   //Check position gift
   gift_move();
-
   ///////////////////////////////////////////////////////////////////////////////////////////////
   console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
@@ -235,23 +235,24 @@ function gift_move() {
       // Define if the gift is in the press area
       if(position_minimum <= position  &&  position <= position_maximun){
         position_status = 450;
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        //console.log('%c appuie', 'background-color: green; padding: 5px');
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        console.log('%c appuie', 'background-color: green; padding: 5px');
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
       } else if (position_maximun <= position) {
         position = 0;
         ///////////////////////////////////////////////////////////////////////////////////////////////
-        //console.log('%c appuie', 'background-color: blue; padding: 5px');
+        console.log('%c appuie', 'background-color: blue; padding: 5px');
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
       } 
 
       ///////////////////////////////////////////////////////////////////////////////////////////////
-      //console.log(position + 'px');
+      console.log(position + 'px');
       ///////////////////////////////////////////////////////////////////////////////////////////////
     }
   }
+  
 }
 
 
@@ -263,46 +264,46 @@ function gift_move() {
 * f : fireplace_3
 */
 
-oxo.inputs.listenKeys([ `q`], function(key) {
-  clearInterval(refresh_timer);
-  laser_effect();
-  // Compare the tower was selected
-  if(spawners_select[0] === spawners_select[fireplace_select]) {
-    console.log('q');
-
-    score();
-  }
-});
-
-
-oxo.inputs.listenKeys([ `s`], function(key) {
-  clearInterval(refresh_timer);
-  laser_effect();
-  // Compare the tower was selected
-  if(spawners_select[1] === spawners_select[fireplace_select]) {
-    console.log('s');
-    score();
-  }
-});
-
-
-oxo.inputs.listenKeys([ `d`], function(key) {
-  clearInterval(refresh_timer);
-  laser_effect();
-  // Compare the tower was selected
-  if(spawners_select[2] === spawners_select[fireplace_select]) {
-    console.log('d');
-    score();
-  }
-});
-
-
 oxo.inputs.listenKeys([ `f`], function(key) {
   clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
-  if(spawners_select[3] === spawners_select[fireplace_select]) {
+  if(spawners_select[0] === spawners_select[fireplace_select]) {
     console.log('f');
+
+    score();
+  }
+});
+
+
+oxo.inputs.listenKeys([ `g`], function(key) {
+  clearInterval(refresh_timer);
+  laser_effect();
+  // Compare the tower was selected
+  if(spawners_select[1] === spawners_select[fireplace_select]) {
+    console.log('g');
+    score();
+  }
+});
+
+
+oxo.inputs.listenKeys([ `h`], function(key) {
+  clearInterval(refresh_timer);
+  laser_effect();
+  // Compare the tower was selected
+  if(spawners_select[2] === spawners_select[fireplace_select]) {
+    console.log('h');
+    score();
+  }
+});
+
+
+oxo.inputs.listenKeys([ `j`], function(key) {
+  clearInterval(refresh_timer);
+  laser_effect();
+  // Compare the tower was selected
+  if(spawners_select[3] === spawners_select[fireplace_select]) {
+    console.log('j');
     score();
   }
 });

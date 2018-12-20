@@ -1,31 +1,49 @@
-.infoBox{
-  position: relative;
-  background-color: #fff;
-  color: #000;
-  border: solid 3px black;
-  font-weight: bold;
-  margin-right: 1vw;
-  margin-top: -20px;
-  width: 0%;
-  margin-left: 95%;
-  height: 0;
-  text-align: left;
-  transition: all 0.3s 0s, opacity 0.1s .2s;
-  a,p{
-    opacity: 0;
+.infoBoxes{
+  position: absolute;
+  top:0;
+  right: 1vw;
+  width: 20%;
+  text-align: right;
+
+  .infoBoxes__button{
+    width: 100px;
+    transition: all;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 25px;
+    position: relative;
+    z-index: 3;
   }
-  p{
-    margin-bottom: 15px;
-  }
-  &.infoBox--active{
-    height: auto;
-    opacity: 1;
-    padding: 15px;
-    padding-top: 30px;
-    width: 95%;
-    margin-left: 0%;
+  
+  .infoBox{
+    position: relative;
+    background-color: #fff;
+    color: #000;
+    border: solid 3px black;
+    font-weight: bold;
+    margin-right: 1vw;
+    margin-top: -20px;
+    width: 0%;
+    margin-left: 95%;
+    height: 0;
+    text-align: left;
+    transition: all 0.3s 0s, opacity 0.1s .2s;
     a,p{
+      opacity: 0;
+    }
+    p{
+      margin-bottom: 15px;
+    }
+    &.infoBox--active{
+      height: auto;
       opacity: 1;
+      padding: 15px;
+      padding-top: 30px;
+      width: 95%;
+      margin-left: 0%;
+      a,p{
+        opacity: 1;
+      }
     }
   }
 }

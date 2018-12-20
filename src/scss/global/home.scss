@@ -1,10 +1,20 @@
+@keyframes blink{
+  to   {transform: scale(1);}
+  from  {transform: scale(1.05);}
+}
 .title{
   font-family: 'Press Start 2P', cursive;
   color: #fff;
   text-align: center;
   width:40%;
   left:30%;
-  font-size: 80px;
-  top: 35vh;
   position: absolute;
+  &.title--main{
+    top: 25vh;
+  }
+  
+  &.title--sub{
+    animation: blink 0.75s ease-in-out infinite alternate;
+    top: 55vh;
+  }
 }

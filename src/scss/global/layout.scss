@@ -1,23 +1,10 @@
-.game{
-  //overflow-y: hidden;
-  //max-height:100vh;
-  background-color: $color--bg;
-  //Snow
-
+.wrapper{
   font-family: sans-serif;
-  overflow-x: hidden;
-  /* Snow inspired by Codepen Jonathan Ekström */ 
-  background-image: url(../img/SVG/snowFlakes-3.svg),url(../img/SVG/snowFlakes-4.svg);
-  animation: snow 20s linear infinite;
-	right: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  margin-top: 0;
-  background-repeat: no-repeat;
+  background-color: $color--bg;
+  @include snowStorm(url(../img/SVG/snowFlakes-3.svg),url(../img/SVG/snowFlakes-4.svg));
 }
 
-@keyframes snowü { 
+@keyframes snow { 
   0% { background-position: 0px 0px, 0px 0px, 0px 0px }
   100% { background-position: 500px 1000px, 400px 400px, 300px 300px }
 }
