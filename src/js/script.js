@@ -7,15 +7,23 @@
 /*
 * TODO:
 *
-* FIXME: Demander setInterval -> s'arrêter et gagner de la vitesse
+* FIXME: Demander NbGifts
 *
-* FIXME: Demander Positionnement temps réel
-*        Demander refresh de chaque
+* FIXME: Demander getID
 *
-* FIXME: Demander pour BAD and GOOD
-*
-* FIXME: Demander music
 */
+
+
+/* 
+let rules = document.getElementById(`rules`).addEventListener('click', function() {
+  barre.classList.toggle('infoBox--active');
+});
+
+let info = document.getElementById(`info`).addEventListener('click', function() {
+  barre.classList.toggle('infoBox--active');
+});
+ */
+
 
 /* 
 * Variable
@@ -23,8 +31,8 @@
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 400; // Initial Position
-let position_maximun = 475; // Maximun position
+let position_minimum  = 450; // Initial Position
+let position_maximun = 550; // Maximun position
 let position_final = 700; // Finak Position
 let position_status;
 let countdown_start;
@@ -132,6 +140,7 @@ function count() {
   } 
   else {
     // WHile time != 0 do :
+    NbGifts = NbGifts + 1;
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //console.log( timer + " secondes restantes");
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +195,8 @@ function spawn() {
   `gift_3`);
 
   //  Add a random gift and define 1 ID for each
-  NbGifts++;
+  
+  console.log(NbGifts);
   spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present present--${gift_color_array[gift_color_select]}"></div>`;
   
   
@@ -199,7 +209,7 @@ function spawn() {
   gift_move();
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  //console.log( spawners_select[fireplace_select]);
+  console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
   //console.log(character);
   //console.log(position = oxo.animation.getPosition(character));
@@ -228,9 +238,9 @@ function gift_move() {
       // Define if the gift is in the press area
       if(position_minimum <= position  &&  position <= position_maximun){
         position_status = 450;
-         ///////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////
         //console.log('%c appuie', 'background-color: green; padding: 5px');
-         ///////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////
 
       } else if (position_maximun <= position) {
         position = 0;
@@ -307,16 +317,13 @@ oxo.inputs.listenKeys([ `f`], function(key) {
 function score(){
   // Compare position
   if (position_minimum <= position_status  &&  position_status <= position_maximun) {
+
+    // Check
+    spawners_select[fireplace_select].classList.add(`check`);
+    console.log(spawners_select[fireplace_select]);
+    
     if (character.classList.contains(`bad`)){
-      health--;
-      health_select[health].classList.remove(`health`);
-      speed = speed- 15;
-      
-      //Arrête la partie
-      if(health === 0){
-        finish();
-        
-      } 
+      health_counter();
     } else {
 
       //spawners_select[fireplace_select].classList.add(`present--noAccept`);
@@ -343,5 +350,22 @@ function laser_effect() {
   setTimeout(function() {
   laser.classList.remove(`laser`);
   }, timer_laser);
+}
+//
+
+/*
+* Health Counter Function
+*/
+
+function health_counter(){
+  health--;
+  health_select[health].classList.remove(`health`);
+  speed = speed- 15;
+  
+  //Arrête la partie
+  if(health === 0){
+    finish();
+    
+  } 
 }
 //
