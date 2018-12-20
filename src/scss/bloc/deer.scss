@@ -42,6 +42,10 @@
       }
     }
   }
+
+  .deer__arm--up {
+    transform: rotate(-90deg)
+  }
   .deer__head{
     top: 0;
     width: 50%;

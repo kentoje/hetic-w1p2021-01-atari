@@ -11,7 +11,8 @@
 *
 * FIXME: Demander getID
 *
-* FIXME: Demander overflow
+*
+* FIXME: Demander pour cadeau vie en moins si pas cliqué
 *
 */
 
@@ -65,7 +66,7 @@ let speed = 1000; // Speed spawn gifts
 let timer = 90;  //Game Timer
 let speed_gift = null; //Game stop
 let speed_timer = null; //Game stop 
-let timer_laser = 10; // Timer Laser
+let timer_laser = 200; // Timer Laser
 let position_refresh = 10;
 let refresh;
 let refresh_timer;
@@ -77,19 +78,16 @@ let audio_laser; // Laser soundù
 * Load the game when enter is press
 */
 
-oxo.inputs.listenKey('end', function() {
+oxo.inputs.listenKey('enter', function() {
   // do something
   if (oxo.screens.getCurrentScreen !== 'end') {
-    oxo.screens.loadScreen(`game`, function() {
+    oxo.screens.loadScreen(`end`, function() {
     // game.html is loaded, do something
 
     //Select countdown_start
     countdown_start = document.getElementById(`countdown_start`);
 
-
-    // Get Snow
     wrapper_select = document.getElementById(`game__area_snow`);
-    
 
     //  Show  countdown when the party starts 
     let timeleft = 3;
@@ -109,23 +107,31 @@ oxo.inputs.listenKey('end', function() {
       health_select = document.querySelectorAll(`.health`);
 
       //Select laser
-      laser = document.getElementById(`laser`);
+      laser = document.getElementById(`deer_arm`);
+      
+    console.log(laser);
+      
+    //Select snow div
+    snow_life = document.querySelectorAll(`.snow_life`);
+    
+    //Select audio
+    audio_background = document.getElementById('song_background');
+    audio_laser = document.getElementById('song_laser');
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //console.log(health_select);
+    //console.log('spawners_select  '+ spawners_select);
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //Load start Function
+    setTimeout(function() {
 
-      //Select snow div
-      snow_life = document.querySelectorAll(`.snow_life`);
-      console.log(snow_life);
-      //Select audio
-      audio_background = document.getElementById('song_background');
-      audio_laser = document.getElementById('song_laser');
-      ///////////////////////////////////////////////////////////////////////////////////////////////
-      //console.log(health_select);
-      //console.log('spawners_select  '+ spawners_select);
-      ///////////////////////////////////////////////////////////////////////////////////////////////
-
-      //Load start Function
-      setTimeout(function() {
-        laser.classList.remove(`laser`);
-        start();
+      // Anime the deer
+      laser.classList.remove(`deer__arm--start`);
+      laser.classList.remove(`deer__arm--shoot`);
+      laser.classList.add(`deer__arm--up`);
+      
+      console.log(laser);
+      start();
         }, 4500);
     }); 
   } 
@@ -207,8 +213,8 @@ function spawn() {
   `gift_3`);
 
   //  Add a random gift and define 1 ID for each
-  console.log(NbGifts);
-  spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present present--${gift_color_array[gift_color_select]}"></div>`;
+  //console.log(NbGifts);
+  spawners_select[fireplace_select].innerHTML = `<div id="gift_moving_${NbGifts}" class="${gift_array[oxo.utils.getRandomNumber(0, gift_array.length - 1)]} gifts present "><div class="present__image present--${gift_color_array[gift_color_select]}"></div><div class="present__value present__value--coint"><img src=""></div></div>`;
   
   
 
@@ -219,7 +225,7 @@ function spawn() {
   //Check position gift
   gift_move();
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  console.log( spawners_select[fireplace_select]);
+  //console.log( spawners_select[fireplace_select]);
   //console.log(character.className === `bad`);
   //console.log(character);
   //console.log(position = oxo.animation.getPosition(character));
@@ -357,10 +363,11 @@ function score(){
  
 function laser_effect() {
   // Visual Effect
-  laser.classList.add(`laser`);
+  laser.classList.add(`deer__arm--shoot`);
   // Disapear laser after a delay
   setTimeout(function() {
-  laser.classList.remove(`laser`);
+  laser.classList.remove(`deer__arm--shoot`);
+  console.log(laser);timer_laser
   }, timer_laser);
 }
 //

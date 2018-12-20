@@ -17,22 +17,32 @@
   }
 
   .present__image{
-    
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+
+    &.present--red {
+      background-image: url(../img/SVG/present--red.svg);
+    }
+    &.present--green {
+      background-image: url(../img/SVG/present--green.svg);
+    }
+    &.present--yellow {
+      background-image: url(../img/SVG/present--yellow.svg);
+    }
+    &.present--black {
+      background-image: url(../img/SVG/present--black.svg);
+    }
   }
-  &.present--red {
-    background-image: url(../img/SVG/present--red.svg);
-  }
-  &.present--green {
-    background-image: url(../img/SVG/present--green.svg);
-  }
-  &.present--yellow {
-    background-image: url(../img/SVG/present--yellow.svg);
-  }
+
+ 
 
 }
 
 .present--bad{
-  background-image: url(../img/SVG/present--black.svg);
+ 
   &::after{
     @include pseudo--absolute;
     width: 60%;
