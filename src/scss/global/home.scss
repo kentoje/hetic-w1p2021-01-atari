@@ -16,6 +16,9 @@
   &.title--sub{
     animation: blink 0.75s ease-in-out infinite alternate;
     top: 55vh;
+  }&.title--end{
+    animation: blink 0.75s ease-in-out infinite alternate;
+    top: 30vh;
   }
 }
 

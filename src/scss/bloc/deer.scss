@@ -119,3 +119,14 @@
   }
   animation: arm 1s ease-in 3s forwards;
 }
+
+.end{
+  .deer{
+    animation: deer--partir 2.5s forwards;
+    @keyframes deer--partir{
+      0%   {bottom: -8.6vw;}
+      100%  {bottom: 100vw;}
+    }
+  }
+}
+

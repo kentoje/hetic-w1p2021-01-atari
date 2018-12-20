@@ -45,6 +45,11 @@
   }
 }
 
-/* html {
+html {
   scroll-behavior: smooth;
-} */
+}
+
+.scrollTrigger {
+  position: absolute;
+  top: -100px;
+}

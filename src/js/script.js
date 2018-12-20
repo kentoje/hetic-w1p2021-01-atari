@@ -37,8 +37,8 @@ oxo.screens.loadScreen('home', function() {
 
 let initial; // Value Initial Game
 let position; // Actual Position Gift
-let position_minimum  = 400; // Initial Position
-let position_maximun = 500; // Maximun position
+let position_minimum  = 0; //400; // Initial Position
+let position_maximun = 600;//500; // Maximun position
 let position_final = 700; // Finak Position
 let position_status;
 let countdown_start;
@@ -46,7 +46,7 @@ let gift_color_array = ['red', 'yellow', 'green', 'black'];
 let gift_color_select;
 
 let gift_statut = ['present--good good', 'present--bad bad']; // Define if the gift is good or bad
-let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
+let gift_array = [`gift_0 ${gift_statut[1]}`, `gift_1 ${gift_statut[1]}`, `gift_2 ${gift_statut[1]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
 let bonus; // Add a bonus
 //let gift_check; // Check gift statue
@@ -74,6 +74,9 @@ let refresh_timer;
 let audio_background; // Variable Background Song
 let audio_laser; // Laser soundù
 let gift;
+//let end_id; // Choose the end
+let end_status = true;
+let end_id;
 //
 
 /* 
@@ -84,7 +87,7 @@ oxo.inputs.listenKey('enter', function() {
   // do something
   if (oxo.screens.getCurrentScreen !== 'game') {
     oxo.screens.loadScreen(`game`, function() {
-    // game.html is loaded, do something
+    // game.html is loaded, do something  
 
     //Select countdown_start
     countdown_start = document.getElementById(`countdown_start`);
@@ -154,7 +157,6 @@ function count() {
   if(timer == 0){
     finish();
 
-
   } 
   else {
     // WHile time != 0 do :
@@ -166,14 +168,28 @@ function count() {
 }
 
 function finish() {
-  // Load End game
-/*     
+  // Load End game  
   oxo.screens.loadScreen('end', function() {
+
+    
+   end_id = document.getElementById(`end_type`);
+
+    // Choose the end
+    if(end_status === true) {
+      end_id.classList.add(`goodScore`);
+    } else {
+      end_id.classList.add(`badScore`);
+    }
     let test = document.getElementById('top_bottom');
-    console.log(test);
-    document.getElementById('top_bottom').click();
+
+    setTimeout(function() {
+      document.getElementById('top_bottom').click();
+      //console.log('smooth');
+      }, 1000);
+
+
   });
-     */
+     
   clearInterval(speed_timer);
   clearInterval(refresh);
   clearInterval(refresh_timer);
@@ -222,7 +238,7 @@ function spawn() {
 
   var giftInterval = setInterval(function() {
     oxo.animation.move(gift, 'down', 10);
-    console.log(oxo.animation.getPosition(gift).y);
+    //console.log(oxo.animation.getPosition(gift).y);
   }, 10);
 
   // When the gift go out of the screen
@@ -271,7 +287,7 @@ oxo.inputs.listenKeys([ `f`], function(key) {
   if(spawners_select[0] === spawners_select[fireplace_select]) {
     console.log('f');
 
-    console.log(oxo.animation.getPosition(gift));
+    //console.log(oxo.animation.getPosition(gift));
    
 
     score();
@@ -356,7 +372,7 @@ function laser_effect() {
   // Disapear laser after a delay
   setTimeout(function() {
   laser.classList.remove(`deer__arm--shoot`);
-  console.log(laser);timer_laser
+  //console.log(laser);
   }, timer_laser);
 }
 //
@@ -377,6 +393,8 @@ function health_counter(){
   snow_life[health].classList.add(`disturber--snow`);
   //Arrête la partie
   if(health === 0){
+    // Set the bad game
+    end_status = false;
     finish();
     
   } 
