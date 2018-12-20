@@ -45,7 +45,7 @@ let gift_color_array = ['red', 'yellow', 'green', 'black'];
 let gift_color_select;
 
 let gift_statut = ['present--good good', 'present--bad bad']; // Define if the gift is good or bad
-let gift_array = [`gift_0 ${gift_statut[1]}`, `gift_1 ${gift_statut[1]}`, `gift_2 ${gift_statut[1]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
+let gift_array = [`gift_0 ${gift_statut[0]}`, `gift_1 ${gift_statut[0]}`, `gift_2 ${gift_statut[0]}`, `gift_3 ${gift_statut[1]}`]; // Array Gifts and add their statuts
 let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4`]; // Array Spawns
 let bonus; // Add a bonus
 //let gift_check; // Check gift statue
@@ -251,7 +251,7 @@ function spawn() {
   var giftInterval = setInterval(function() {
     oxo.animation.move(gift, 'down', 10);
     //console.log(oxo.animation.getPosition(gift).y);
-  }, 10);
+  }, 20);
 
   // When the gift go out of the screen
   oxo.elements.onLeaveScreenOnce(gift, function() {
