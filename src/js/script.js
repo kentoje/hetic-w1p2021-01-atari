@@ -45,11 +45,8 @@ let fireplace_array = [`fireplace_0`, `fireplace_2`, `fireplace_3`, `fireplace_4
 let bonus; // Add a bonus
 //let gift_check; // Check gift statue
 let spawners_select; // Select the spawner
-let spawnTest;
-let turnInterval; // The periodic call to the turn function
 let NbGifts = 0; // Total of gifts
 let character;  // Define the active gift
-let initialY;
 let move;
 let fireplace_select; //Choose the fireplace
 let laser; // Define the laser ID
@@ -65,7 +62,7 @@ let timer_laser = 10; // Timer Laser
 let position_refresh = 10;
 let refresh;
 let refresh_timer;
-let audio_background;
+let audio_background; // Variable Background Song
 //
 
 /* 
@@ -270,9 +267,10 @@ oxo.inputs.listenKeys([ `q`], function(key) {
   clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
-  console.log('q');
   if(spawners_select[0] === spawners_select[fireplace_select]) {
-  score();
+    console.log('q');
+
+    score();
   }
 });
 
@@ -281,8 +279,8 @@ oxo.inputs.listenKeys([ `s`], function(key) {
   clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
-  console.log('s');
   if(spawners_select[1] === spawners_select[fireplace_select]) {
+    console.log('s');
     score();
   }
 });
@@ -292,8 +290,8 @@ oxo.inputs.listenKeys([ `d`], function(key) {
   clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
-  console.log('d');
   if(spawners_select[2] === spawners_select[fireplace_select]) {
+    console.log('d');
     score();
   }
 });
@@ -303,8 +301,8 @@ oxo.inputs.listenKeys([ `f`], function(key) {
   clearInterval(refresh_timer);
   laser_effect();
   // Compare the tower was selected
-  console.log('f');
   if(spawners_select[3] === spawners_select[fireplace_select]) {
+    console.log('f');
     score();
   }
 });
